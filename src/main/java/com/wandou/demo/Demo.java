@@ -5,10 +5,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 
 import java.sql.Array;
-import java.util.Arrays;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
 public class Demo {
     public static void main(String[] args) {
@@ -47,6 +44,20 @@ public class Demo {
         System.out.println(equals1);
 
 
+    }
+
+    @Test
+    public void m4List() {
+        final List<Integer> list = new ArrayList();
+        list.add(6);
+        list.add(9);
+        list.add(77);
+
+        for (Integer i : list) {
+            System.out.println(i);
+        }
+
+//        list.stream().forEach( i () -> { System.out.println(i)});
     }
 
 }

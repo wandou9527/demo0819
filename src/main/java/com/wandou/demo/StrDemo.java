@@ -35,4 +35,9 @@ public class StrDemo {
         //这里s10与s11位由final修饰为宏变量，编译器会把程序中所有用到该变量的地方直接替换成该变量的值，故s12编译时就确定了。
         //指向常量池中的对象。
     }
+
+    @Test
+    public void m2() {
+        System.out.println();
+    }
 }
