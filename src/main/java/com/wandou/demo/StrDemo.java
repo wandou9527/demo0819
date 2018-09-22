@@ -16,12 +16,12 @@ public class StrDemo {
         //--------------------
         String s3 = new String("aa");
         String s4 = new String("aa");
-        System.out.println(s3 == s4);
-        System.out.println(s3.equals(s4));
+        System.out.println("s3 == s4 ? " + (s3 == s4));
+        System.out.println("s3.equals(s4) ? " + s3.equals(s4));
 
         String s5 = "HelloJava";
         String s6 = "Hello" + "Java";
-        System.out.println(s5 == s6);
+        System.out.println("s5 == s6 ? " + (s5 == s6));
 
         String s7 = "Hello";
         String s8 = "Java";
@@ -32,8 +32,10 @@ public class StrDemo {
         final String s11 = "Java";
         String s12 = s10 + s11;
         System.out.println("s5 == s12 ? " + (s5 == s12));//true
-        //这里s10与s11位由final修饰为宏变量，编译器会把程序中所有用到该变量的地方直接替换成该变量的值，故s12编译时就确定了。
-        //指向常量池中的对象。
+        //这里s10与s11位由final修饰为宏变量，编译器会把程序中所有用到该变量的地方直接替换成该变量的值，故s12编译时就确定了。指向常量池中的对象。
+
+        String s13 = s5;
+        System.out.println("s5 == s13 ? " + (s5 == s13));
     }
 
     @Test

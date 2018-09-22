@@ -4,6 +4,7 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 
+import javax.servlet.GenericServlet;
 import java.sql.Array;
 import java.util.*;
 
@@ -58,6 +59,8 @@ public class Demo {
         }
 
 //        list.stream().forEach( i () -> { System.out.println(i)});
+
+        Class<GenericServlet> genericServletClass = GenericServlet.class;
     }
 
 }
