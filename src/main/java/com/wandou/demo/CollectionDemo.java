@@ -43,13 +43,13 @@ public class CollectionDemo {
         boolean equals1 = ArrayUtils.isEquals(arr1, arr2);
         System.out.println(equals1);
 
-        List<Integer> list1 = Arrays.asList(1, 2, 3, 1);
-        List<Integer> list2 = Arrays.asList(2, 3, 1, 1);
+        List<Integer> list1 = Arrays.asList(1, 2, 3, 1, 1);
+        List<Integer> list2 = Arrays.asList(2, 3, 1, 1, 2);
         boolean equalCollection = CollectionUtils.isEqualCollection(list1, list2);
         System.out.println("CollectionUtils.isEqualCollection(list1, list2)? " + equalCollection);
-        //全包含式的判断
+        //全包含式的判断 证明不严谨【1 1 2】【1 2 2】情况
         boolean boo = list1.containsAll(list2) && list2.containsAll(list1);
-        System.out.println("全包含式的判断: " + boo);
+        System.out.println("全包含式的判断 list1 list2: " + boo);
 
 //        List<Integer> list1 = Arrays.asList(1, 2, 3, 3);
 //        List<Integer> list2 = Arrays.asList(2, 3, 1);
@@ -77,17 +77,25 @@ public class CollectionDemo {
     }
 
     @Test
-    public void m4List() {
+    public void m4ListContains() {
         final List<Integer> list = new ArrayList();
         list.add(6);
         list.add(9);
         list.add(77);
+        list.add(77);
 
-        for (Integer i : list) {
-            System.out.println(i);
-        }
+        final List<Integer> list2 = new ArrayList();
+        list2.add(6);
+        list2.add(77);
+        list2.add(9);
+        list2.add(9);
 
-//        list.stream().forEach( i () -> { System.out.println(i)});
+        System.out.println(list.containsAll(list2));
+        System.out.println(list2.containsAll(list));
+
+        Collection<Integer> union = CollectionUtils.union(list, list2);
+        System.out.println(union);
+
     }
 
 }
