@@ -43,8 +43,8 @@ public class CollectionDemo {
         boolean equals1 = ArrayUtils.isEquals(arr1, arr2);
         System.out.println(equals1);
 
-        List<Integer> list1 = Arrays.asList(1, 2, 3);
-        List<Integer> list2 = Arrays.asList(2, 3, 1);
+        List<Integer> list1 = Arrays.asList(1, 2, 3, 1);
+        List<Integer> list2 = Arrays.asList(2, 3, 1, 1);
         boolean equalCollection = CollectionUtils.isEqualCollection(list1, list2);
         System.out.println("CollectionUtils.isEqualCollection(list1, list2)? " + equalCollection);
         //全包含式的判断
@@ -70,7 +70,8 @@ public class CollectionDemo {
         set2.add(9);
         System.out.println("isEqualCollection(set1, set2)? " + CollectionUtils.isEqualCollection(set1, set2));
 
-//        System.out.println("CollectionUtils.isEqualCollection(list1, list2): " + CollectionUtils.isEqualCollection(list1, list2));
+        Map<Integer, Integer> list1CardinalityMap = CollectionUtils.getCardinalityMap(list1);
+        System.out.println("list1CardinalityMap: " + list1CardinalityMap);
 
 
     }
