@@ -1,5 +1,10 @@
 spring:
   profiles:
     active: dev
+server:
+  port: 8081
+-Xms: 40960m
+-Xmx: 40960m
+-Xmn: 40960m
 
 

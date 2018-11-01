@@ -1,20 +1,13 @@
 package com.wandou.demo;
 
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 
-import javax.servlet.GenericServlet;
 import java.util.*;
 
-/**
- * @author liming
- * @date 2018/9/21 15:54
- * @description
- * @modify
- */
-
-public class Demo {
+public class CollectionDemo {
     public static void main(String[] args) {
         boolean b = ifStr("22");
         System.out.println(b);
@@ -50,6 +43,26 @@ public class Demo {
         boolean equals1 = ArrayUtils.isEquals(arr1, arr2);
         System.out.println(equals1);
 
+        List<Integer> list1 = Arrays.asList(1, 2, 3);
+        List<Integer> list2 = Arrays.asList(2, 3, 1);
+        boolean equalCollection = CollectionUtils.isEqualCollection(list1, list2);
+        System.out.println("CollectionUtils.isEqualCollection(list1, list2)? " + equalCollection);
+        //全包含式的判断
+        boolean boo = list1.containsAll(list2) && list2.containsAll(list1);
+        System.out.println("全包含式的判断: " + boo);
+
+        Set set1 = new HashSet();
+        Set set2 = new HashSet();
+        set1.add(1);
+        set1.add(4);
+        set1.add(9);
+        set2.add(4);
+        set2.add(1);
+        set2.add(9);
+        System.out.println("isEqualCollection(set1, set2)? " + CollectionUtils.isEqualCollection(set1, set2));
+
+//        System.out.println("CollectionUtils.isEqualCollection(list1, list2): " + CollectionUtils.isEqualCollection(list1, list2));
+
 
     }
 
@@ -65,8 +78,6 @@ public class Demo {
         }
 
 //        list.stream().forEach( i () -> { System.out.println(i)});
-
-        Class<GenericServlet> genericServletClass = GenericServlet.class;
     }
 
 }
