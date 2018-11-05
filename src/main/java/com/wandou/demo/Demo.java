@@ -1,6 +1,7 @@
 package com.wandou.demo;
 
 import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 
@@ -28,7 +29,7 @@ public class Demo {
     public static void m2() {
         Map map = new LinkedHashMap();
         for (int i = 0; i < 10; i++) {
-            map.put(new Random().nextInt(), new Random().nextInt());
+            map.put(new Random().nextInt(), RandomStringUtils.randomNumeric(8));
         }
         System.out.println(map);
     }
@@ -45,10 +46,10 @@ public class Demo {
         int[] arr1 = {1, 5, 8};
         int[] arr2 = {5, 8, 1};
         boolean equals = Arrays.equals(arr1, arr2);
-        System.out.println(equals);
+        System.out.println(equals);//false
 
         boolean equals1 = ArrayUtils.isEquals(arr1, arr2);
-        System.out.println(equals1);
+        System.out.println(equals1);//false
 
 
     }
