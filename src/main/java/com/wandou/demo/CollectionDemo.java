@@ -46,19 +46,10 @@ public class CollectionDemo {
         List<Integer> list1 = Arrays.asList(1, 2, 3, 1, 1);
         List<Integer> list2 = Arrays.asList(2, 3, 1, 1, 2);
         boolean equalCollection = CollectionUtils.isEqualCollection(list1, list2);
-        System.out.println("CollectionUtils.isEqualCollection(list1, list2)? " + equalCollection);
-        //全包含式的判断 证明不严谨【1 1 2】【1 2 2】情况
+        System.out.println("CollectionUtils.isEqualCollection(list1, list2)? " + equalCollection);//false
+        //全包含式的判断 证明不严谨, 【1 1 2】【1 2 2】情况
         boolean boo = list1.containsAll(list2) && list2.containsAll(list1);
-        System.out.println("全包含式的判断 list1 list2: " + boo);
-
-//        List<Integer> list1 = Arrays.asList(1, 2, 3, 3);
-//        List<Integer> list2 = Arrays.asList(2, 3, 1);
-//        boolean equalCollection = CollectionUtils.isEqualCollection(list1, list2);
-//        System.out.println("isEqualCollection? " + equalCollection);
-//
-//        boolean boo = list1.containsAll(list2) && list2.containsAll(list1);
-//        System.out.println("boo: " + boo);
-
+        System.out.println("全包含式的判断 list1 list2: " + boo);//true
 
         Set set1 = new HashSet();
         Set set2 = new HashSet();
@@ -68,7 +59,7 @@ public class CollectionDemo {
         set2.add(4);
         set2.add(1);
         set2.add(9);
-        System.out.println("isEqualCollection(set1, set2)? " + CollectionUtils.isEqualCollection(set1, set2));
+        System.out.println("isEqualCollection(set1, set2)? " + CollectionUtils.isEqualCollection(set1, set2));//true
 
         Map<Integer, Integer> list1CardinalityMap = CollectionUtils.getCardinalityMap(list1);
         System.out.println("list1CardinalityMap: " + list1CardinalityMap);
