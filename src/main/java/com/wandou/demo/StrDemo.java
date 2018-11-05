@@ -1,6 +1,10 @@
 package com.wandou.demo;
 
 import org.junit.Test;
+import org.springframework.util.DigestUtils;
+
+import java.io.UnsupportedEncodingException;
+import java.util.Base64;
 
 public class StrDemo {
     /**
@@ -39,7 +43,36 @@ public class StrDemo {
     }
 
     @Test
-    public void m2() {
-        System.out.println();
+    public void m2() throws UnsupportedEncodingException {
+        String localChartSet = System.getProperty("file.encoding");
+        System.out.println("localChartSet>>>>" + localChartSet);   //查看本地默认字符集
+
+        String str = "str";
+        byte[] bytes1 = str.getBytes("utf-8");
+
+        for (int i = 0; i < bytes1.length; i++) {
+            System.out.println("#" + i + ": " + (char) bytes1[i]);
+            System.out.println("#: " + bytes1[i]);
+        }
+
+        byte[] bytes = DigestUtils.md5Digest(bytes1);//返回的为什么编码？直接转应该走本地编码即utf-8
+        for (int i = 0; i < bytes.length; i++) {
+            System.out.println("##" + i + ": " + bytes[i]);
+            System.out.println("##: " + bytes[i]);
+        }
+        System.out.println(new String(bytes, "iso-8859-1"));//java 默认使用 iso8859-1
+        System.out.println(new String(bytes, "utf-8"));
+        System.out.println(new String(bytes, "utf-16"));
+        System.out.println(new String(bytes, "gbk"));
+        System.out.println(new String(bytes, "gb2312"));
+        System.out.println(new String(bytes, "ASCII"));
+
+        String base64ToStr = Base64.getEncoder().encodeToString(bytes);
+        System.out.println("base64ToStr: " + base64ToStr);
+
+        String md5DigestAsHex = DigestUtils.md5DigestAsHex(bytes1);
+        System.out.println(md5DigestAsHex);
+
+
     }
 }

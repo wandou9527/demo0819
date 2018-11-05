@@ -28,6 +28,7 @@ public class IntegerDemo {
         System.out.println(i);
 
         System.out.println(Integer.max(9, 4));
+        System.out.println(Integer.MIN_VALUE);
         System.out.println(Integer.MAX_VALUE);
 
         System.out.println(9 & 5);
