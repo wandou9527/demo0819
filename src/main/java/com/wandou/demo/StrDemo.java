@@ -1,10 +1,14 @@
 package com.wandou.demo;
 
+import org.apache.commons.lang3.time.DateFormatUtils;
 import org.junit.Test;
 import org.springframework.util.DigestUtils;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Base64;
+import java.util.Date;
+import java.util.Random;
+import java.util.TimeZone;
 
 public class StrDemo {
     /**
@@ -72,7 +76,21 @@ public class StrDemo {
 
         String md5DigestAsHex = DigestUtils.md5DigestAsHex(bytes1);
         System.out.println(md5DigestAsHex);
+    }
 
+    @Test
+    public void m3() {
+        StringBuffer stringBuffer = new StringBuffer();
+        stringBuffer.append(4).append(3).append(9);
+        System.out.println(stringBuffer);
+        System.out.println(stringBuffer.reverse());
 
+        String yyyyMMddHHmmss = DateFormatUtils.format(new Date(), "yyMMddHHmmssSSS", TimeZone.getTimeZone("Asia/Shanghai"));
+//        yyyyMMddHHmmss = yyyyMMddHHmmss.substring(2);
+        StringBuffer stringBuffer1 = new StringBuffer(yyyyMMddHHmmss);
+        System.out.println(yyyyMMddHHmmss);
+        stringBuffer1.insert(1, "01");
+        stringBuffer1.append(new Random().nextInt(10));
+        System.out.println(stringBuffer1);
     }
 }

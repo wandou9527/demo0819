@@ -1,5 +1,6 @@
 package com.wandou.demo;
 
+import org.apache.commons.lang3.math.NumberUtils;
 import org.junit.Test;
 
 public class IntegerDemo {
@@ -32,5 +33,14 @@ public class IntegerDemo {
         System.out.println(Integer.MAX_VALUE);
 
         System.out.println(9 & 5);
+    }
+
+    @Test
+    public void m3() {
+        int min = NumberUtils.min(6, 4, 9);
+        System.out.println(min);
+        NumberUtils.min(new int[]{2, 4, 9});
+
+        System.out.println(Integer.min(7, 3));
     }
 }
