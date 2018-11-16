@@ -1,7 +1,6 @@
 package com.wandou.util;
 
 import org.junit.Test;
-import org.springframework.util.DigestUtils;
 
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
@@ -13,8 +12,7 @@ public class MD5Util {
     private static char hexDigitsUp[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8',
             '9', 'A', 'B', 'C', 'D', 'E', 'F'};
 
-    //去哪网md5加密
-    public String ctripMd5(Object[] object) {
+    public String pMd5(Object[] object) {
         String result = "";
         StringBuffer param = new StringBuffer();
         if (object != null) {
@@ -132,10 +130,10 @@ public class MD5Util {
         String str1 = post100Encode(str);
         System.out.println("post100Encode: " + str1);
 
-        String str2 = DigestUtils.md5DigestAsHex(str.getBytes());
+        String str2 = org.springframework.util.DigestUtils.md5DigestAsHex(str.getBytes());
         System.out.println("DigestUtils: " + str2);
 
-        String str3 = ctripMd5(new Object[]{str});
+        String str3 = pMd5(new Object[]{str});
         System.out.println("ctripMd5: " + str3);
 
         String str4 = MD5Encode(str);

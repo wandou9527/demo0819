@@ -52,10 +52,10 @@ public class CollectionDemo {
         System.out.println("全包含式的判断 list1 list2: " + boo);//true
 
         Set set1 = new HashSet();
-        Set set2 = new HashSet();
         set1.add(1);
         set1.add(4);
         set1.add(9);
+        Set set2 = new HashSet();
         set2.add(4);
         set2.add(1);
         set2.add(9);

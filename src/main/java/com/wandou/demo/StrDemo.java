@@ -1,8 +1,12 @@
 package com.wandou.demo;
 
+import org.apache.commons.lang3.CharSet;
+import org.apache.commons.lang3.CharSetUtils;
 import org.apache.commons.lang3.time.DateFormatUtils;
+import org.apache.logging.log4j.util.Chars;
 import org.junit.Test;
 import org.springframework.util.DigestUtils;
+import org.springframework.web.HttpRequestHandler;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Base64;
