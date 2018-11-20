@@ -4,6 +4,11 @@ import org.apache.commons.lang3.math.NumberUtils;
 import org.junit.Test;
 
 public class IntegerDemo {
+
+    /**
+     * Integer -128~127 会缓存
+     * https://www.cnblogs.com/xiehongwei/p/7595520.html
+     */
     @Test
     public void m1() {
         Integer i1 = 6;

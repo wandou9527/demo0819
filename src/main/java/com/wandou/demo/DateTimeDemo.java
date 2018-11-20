@@ -77,7 +77,7 @@ public class DateTimeDemo {
         DateTime dateTime = new DateTime(2018, 9, 15, 12, 7, 9, 8);
         Date date = dateTime.toDate();
         System.out.println(DateUtils.getFragmentInMilliseconds(date, Calendar.MILLISECOND));
-        System.out.println(DateUtils.getFragmentInMilliseconds(date, Calendar.SECOND));//对秒取余，返回单位为毫秒
+        System.out.println(DateUtils.getFragmentInMilliseconds(date, Calendar.SECOND));//对秒取余，剩余时间碎片，返回单位为毫秒
         System.out.println(DateUtils.getFragmentInMilliseconds(date, Calendar.MINUTE));//
 //        System.out.println(DateUtils.getFragmentInMilliseconds(date, Calendar.HOUR));//java.lang.IllegalArgumentException: The fragment 10 is not supported
         System.out.println(DateUtils.getFragmentInMilliseconds(date, Calendar.HOUR_OF_DAY));//

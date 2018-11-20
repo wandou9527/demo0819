@@ -1,5 +1,6 @@
 package com.wandou.demo;
 
+import com.wandou.enums.AEnum;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -68,6 +69,20 @@ public class Demo {
 //        list.stream().forEach( i () -> { System.out.println(i)});
 
         Class<GenericServlet> genericServletClass = GenericServlet.class;
+    }
+
+    @Test
+    public void m5E() {
+        String name = AEnum.A.name();//名字内部原生的的名字
+        int ordinal = AEnum.A.ordinal();//内部自动排序的序号
+        System.out.println(AEnum.A);
+        System.out.println(name);
+        System.out.println(ordinal);
+        System.out.println(AEnum.A.getCode());
+        System.out.println(AEnum.A.getName());
+        System.out.println(AEnum.getByCode(0));
+        System.out.println(AEnum.getByCode(2));
+        System.out.println(AEnum.getByCode(3));
     }
 
 }
