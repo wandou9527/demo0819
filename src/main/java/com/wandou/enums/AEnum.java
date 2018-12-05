@@ -13,19 +13,19 @@ public enum AEnum {
     C(3, "英文中第三个字母");
 
     private int code;
-    private String name;
+    private String description;
 
-    AEnum(int code, String name) {
+    AEnum(int code, String description) {
         this.code = code;
-        this.name = name;
+        this.description = description;
     }
 
     public int getCode() {
         return code;
     }
 
-    public String getName() {
-        return name;
+    public String getDescription() {
+        return description;
     }
 
 //    public static OrderStatusEnum getOrderStatusEnumByName(int status) {

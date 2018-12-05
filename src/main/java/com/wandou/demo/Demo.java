@@ -79,10 +79,11 @@ public class Demo {
         System.out.println(name);
         System.out.println(ordinal);
         System.out.println(AEnum.A.getCode());
-        System.out.println(AEnum.A.getName());
+        System.out.println(AEnum.A.getDescription());
         System.out.println(AEnum.getByCode(0));
         System.out.println(AEnum.getByCode(2));
         System.out.println(AEnum.getByCode(3));
+        System.out.println("#################");
     }
 
 }

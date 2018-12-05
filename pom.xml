@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.wandou</groupId>
-    <artifactId>mavendemo0819</artifactId>
+    <artifactId>demo0819</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
