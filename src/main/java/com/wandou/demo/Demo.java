@@ -1,6 +1,7 @@
 package com.wandou.demo;
 
 import com.wandou.enums.AEnum;
+import com.wandou.enums.AlipayTradeStatusEnum;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -84,6 +85,14 @@ public class Demo {
         System.out.println(AEnum.getByCode(2));
         System.out.println(AEnum.getByCode(3));
         System.out.println("#################");
+    }
+
+    @Test
+    public void m6BEnum() {
+        System.out.println(AlipayTradeStatusEnum.TRADE_CLOSED);
+        System.out.println(AlipayTradeStatusEnum.TRADE_CLOSED.getDescription());
+        System.out.println(AlipayTradeStatusEnum.TRADE_CLOSED.getDeclaringClass());
+
     }
 
 }
