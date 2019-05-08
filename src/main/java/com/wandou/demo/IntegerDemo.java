@@ -3,7 +3,11 @@ package com.wandou.demo;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.junit.Test;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 public class IntegerDemo {
+
+    private AtomicInteger atomicInteger = new AtomicInteger(10);
 
     /**
      * Integer -128~127 会缓存
@@ -47,5 +51,15 @@ public class IntegerDemo {
         NumberUtils.min(new int[]{2, 4, 9});
 
         System.out.println(Integer.min(7, 3));
+    }
+
+    /**
+     * 原子 integer
+     */
+    @Test
+    public void m4() {
+        System.out.println(atomicInteger);
+        atomicInteger.incrementAndGet();
+        boolean b = atomicInteger.compareAndSet(1, 2);
     }
 }
