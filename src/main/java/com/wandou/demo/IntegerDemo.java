@@ -1,9 +1,16 @@
 package com.wandou.demo;
 
 import org.apache.commons.lang3.math.NumberUtils;
+import org.assertj.core.util.Lists;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class IntegerDemo {
 
@@ -61,5 +68,34 @@ public class IntegerDemo {
         System.out.println(atomicInteger);
         atomicInteger.incrementAndGet();
         boolean b = atomicInteger.compareAndSet(1, 2);
+    }
+
+    /**
+     * Stream
+     * https://www.cnblogs.com/aoeiuv/p/5911692.html
+     */
+    @Test
+    public void m5() {
+        List<Integer> nums = Lists.newArrayList(1, 1, null, 2, 3, 4, null, 5, 6, 7, 8, 9, 10);
+        System.out.println("sum is:" + nums.stream().filter(num -> num != null).distinct().mapToInt(num -> num * 2).peek(System.out::println).skip(2).limit(4).sum());
+
+        Stream<Integer> stream = nums.stream();
+//        stream.collect(Collectors.toMap(a -> a + 5, a -> a));
+        Stream<Integer> filterStream = stream.filter(a -> a != null);
+        //第一个函数生成一个新的ArrayList实例；
+        //第二个函数接受两个参数，第一个是前面生成的ArrayList对象，二个是stream中包含的元素，函数体就是把stream中的元素加入ArrayList对象中。第二个函数被反复调用直到原stream的元素被消费完毕；
+        //第三个函数也是接受两个参数，这两个都是ArrayList类型的，函数体就是把第二个ArrayList全部加入到第一个中；
+        System.out.println(filterStream.collect(() -> new ArrayList<Integer>(),
+                (list, item) -> list.add(item),
+                (list1, list2) -> list1.addAll(list2)));
+        //与上边一样的效果
+        System.out.println(filterStream.collect(Collectors.toList()));
+
+        Stream<Integer> distinctStream = nums.stream().distinct();
+
+        //注意：sum方法不是所有的Stream对象都有的，只有IntStream、LongStream和DoubleStream是实例才有。
+        IntStream intStream = nums.stream().distinct().mapToInt(a -> a);
+        int sum = intStream.sum();
+
     }
 }
