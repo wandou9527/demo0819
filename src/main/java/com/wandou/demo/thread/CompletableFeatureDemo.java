@@ -81,12 +81,12 @@ public class CompletableFeatureDemo {
      */
     public void dateFormat(CountDownLatch countDownLatch) {
         CompletableFuture.supplyAsync(() -> {
-            System.out.println(Thread.currentThread().getName() + " 开始 ...");
+            System.out.println(Thread.currentThread().getName() + " 就绪 ...");
             System.out.println("线程池 ActiveCount：" + threadPoolExecutor.getActiveCount());
             try {
                 for (int j = 0; j < 1000; j++) {
                     String format = DateUtil.format(new Date());
-                    System.out.println(format + " " + Thread.currentThread().getName());
+                    System.out.println(format + " " + Thread.currentThread().getName() + "运行 。。。");
                 }
             } catch (Exception e) {
                 e.printStackTrace();
