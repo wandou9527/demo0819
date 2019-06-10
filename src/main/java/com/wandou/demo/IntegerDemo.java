@@ -98,4 +98,11 @@ public class IntegerDemo {
         int sum = intStream.sum();
 
     }
+
+    @Test
+    public void m6() {
+        int a = 127;
+        int b = a / 60;
+        System.out.println(b);
+    }
 }

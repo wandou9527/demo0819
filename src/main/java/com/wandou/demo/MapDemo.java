@@ -3,6 +3,7 @@ package com.wandou.demo;
 import org.junit.Test;
 
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @author liming
@@ -18,6 +19,19 @@ public class MapDemo {
         map.put(2, 6);
         map.put(4, 6);
         System.out.println(map);
+    }
+
+    @Test
+    public void m2() {
+        ConcurrentHashMap concurrentHashMap = new ConcurrentHashMap();
+        Object put = concurrentHashMap.put("lala", "vvv");
+        System.out.println(put);
+        concurrentHashMap.size();
+    }
+
+    public void hashMapTest() {
+        HashMap map = new HashMap();
+        map.put("k-lala", "v-zzz");
     }
 
 }

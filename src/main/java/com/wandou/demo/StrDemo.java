@@ -2,6 +2,7 @@ package com.wandou.demo;
 
 import org.apache.commons.lang3.CharSet;
 import org.apache.commons.lang3.CharSetUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateFormatUtils;
 import org.apache.logging.log4j.util.Chars;
 import org.junit.Test;
@@ -96,5 +97,11 @@ public class StrDemo {
         stringBuffer1.insert(1, "01");
         stringBuffer1.append(new Random().nextInt(10));
         System.out.println(stringBuffer1);
+    }
+
+    @Test
+    public void m4() {
+        String substring = StringUtils.substring("2019-05-29 12:00:00", 0, 10);
+        System.out.println(substring); // 2019-05-29
     }
 }
