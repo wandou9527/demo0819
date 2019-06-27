@@ -3,6 +3,8 @@ package com.wandou.test;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import org.junit.Test;
+import org.redisson.RedissonLock;
+import org.springframework.data.redis.connection.convert.LongToBooleanConverter;
 
 /**
  * @author: liming
@@ -19,7 +21,7 @@ public class SimpleTest {
         System.out.println(obj.getClass());
         System.out.println(obj.getClass().getClassLoader());
 
-        Object parse2 = JSONObject.parse("{\"id\":888}");
+//        Object parse2 = JSONObject.parse("{\"id\":888}");
         JSONObject jsonObject = JSONObject.parseObject("{\"id\":888}");
         System.out.println(jsonObject);
 
@@ -30,5 +32,21 @@ public class SimpleTest {
 
         JSONObject jsonObject1 = new JSONObject();
         jsonObject1.toString();
+    }
+
+    /**
+     * Long 如果为1L返回true null有空指针风险
+     */
+    @Test
+    public void m2() {
+        LongToBooleanConverter converter = new LongToBooleanConverter();
+        Boolean convert = converter.convert(1L);
+        System.out.println(convert);
+        Boolean convert1 = converter.convert(2L);
+        System.out.println(convert1);
+        Boolean convert2 = converter.convert(null);
+        System.out.println(convert2);
+
+
     }
 }

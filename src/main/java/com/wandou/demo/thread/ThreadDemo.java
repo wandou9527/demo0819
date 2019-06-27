@@ -6,6 +6,8 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * @author: liming
@@ -55,7 +57,7 @@ public class ThreadDemo {
     public static void m1a() {
         Thread thread = new Thread(() -> {
             for (int i = 0; i < 100; i++) {
-                synchronized(ThreadDemo.class) {
+                synchronized (ThreadDemo.class) {
                     anInt++;
                 }
                 atomicInteger.incrementAndGet();
@@ -92,4 +94,38 @@ public class ThreadDemo {
             }
         });
     }
+
+    /**
+     * 锁
+     */
+    public void lockDemo() {
+        ReentrantLock lock = new ReentrantLock();
+        lock.lock();
+
+        lock.unlock();
+    }
+
+    /**
+     * 多谢程同步器
+     * 提交runnable，以多线程方式执行
+     *  @param threadNum      线程数
+     * @param circulationNum 循环次数
+     * @param runnable
+     * @param countDownLatch
+     */
+    public void threadToolMethod(int threadNum, int circulationNum, Runnable runnable, CountDownLatch countDownLatch) throws InterruptedException {
+//        CountDownLatch countDownLatch = new CountDownLatch(threadNum);
+//        countDownLatch.await();
+        for (int i = 0; i < threadNum; i++) {
+            Thread thread = new Thread(runnable);
+            thread.start();
+            System.out.println("线程 " + thread.getName() + " 创建完毕 ");
+            countDownLatch.countDown();
+            System.out.println("countDownLatch - 1");
+//            countDownLatch.await();
+//            System.out.println("线程 " + thread.getName() + " start 。。。 ");
+        }
+
+    }
+
 }

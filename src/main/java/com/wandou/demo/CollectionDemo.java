@@ -1,13 +1,18 @@
 package com.wandou.demo;
 
+import com.wandou.demo.thread.ThreadDemo;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 
 import java.util.*;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ThreadPoolExecutor;
 
 public class CollectionDemo {
+    private final ArrayList<Long> threadUnsafeList = new ArrayList<>();
+
     public static void main(String[] args) {
         boolean b = ifStr("22");
         System.out.println(b);
@@ -87,6 +92,70 @@ public class CollectionDemo {
         Collection<Integer> union = CollectionUtils.union(list, list2);
         System.out.println(union);
 
+    }
+
+    /**
+     * ArrayList线程不安全的表现 https://blog.csdn.net/toocruel/article/details/82753615
+     */
+    @Test
+    public void m5ListThreadUnsafe() throws InterruptedException {
+        for (int i = 0; i < 10; i++) {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    for (int i = 0; i < 10; i++) {
+                        long currentTimeMillis = System.currentTimeMillis();
+                        try {
+                            threadUnsafeList.add(currentTimeMillis);
+                        } catch (Exception e) {
+                            System.out.print("f");
+                            System.err.println("异常了 " + currentTimeMillis);
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }).start();
+        }
+        Thread.sleep(5000L);
+        int size = threadUnsafeList.size();
+        System.out.println("threadUnsafeList size: " + size);
+        for (int i = 0; i < size; i++) {
+            System.out.println(threadUnsafeList.get(i));
+        }
+    }
+
+    @Test
+    public void m6UseTool() throws InterruptedException {
+        CountDownLatch countDownLatch = new CountDownLatch(10);
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    System.out.println("run 方法内线程 " + Thread.currentThread().getName() + " 准备就绪 ");
+                    countDownLatch.await();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                for (int i = 0; i < 10; i++) {
+                    System.out.println("run 方法内线程 " + Thread.currentThread().getName() + " 开始执行 ");
+                    long currentTimeMillis = System.currentTimeMillis();
+                    try {
+                        threadUnsafeList.add(currentTimeMillis);
+                    } catch (Exception e) {
+                        System.out.print("ffff");
+                        System.err.println("异常了 " + currentTimeMillis);
+                        e.printStackTrace();
+                    }
+                }
+            }
+        };
+        new ThreadDemo().threadToolMethod(10, 10, runnable, countDownLatch);
+        Thread.sleep(5000L);
+        int size = threadUnsafeList.size();
+        System.out.println("threadUnsafeList size: " + size);
+        for (int i = 0; i < size; i++) {
+            System.out.println(threadUnsafeList.get(i));
+        }
     }
 
 }
