@@ -1,6 +1,7 @@
 package com.wandou.demo.thread;
 
 import org.apache.commons.lang3.time.DateUtils;
+import org.junit.Test;
 
 import java.util.Collection;
 import java.util.Iterator;
@@ -23,6 +24,8 @@ public class ThreadDemo {
     private static BlockingQueue<Runnable> blockingQueue = new LinkedBlockingDeque();
     private static ThreadPoolExecutor threadPool = new ThreadPoolExecutor(5,
             10, DateUtils.MILLIS_PER_DAY, TimeUnit.MILLISECONDS, blockingQueue);
+
+    private ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(2);
 
     public static void main(String[] args) throws InterruptedException {
         for (int i = 0; i < 100; i++) {
@@ -106,7 +109,7 @@ public class ThreadDemo {
     }
 
     /**
-     * 多谢程同步器
+     * 多线程同步器
      * 提交runnable，以多线程方式执行
      *  @param threadNum      线程数
      * @param circulationNum 循环次数
@@ -125,6 +128,19 @@ public class ThreadDemo {
 //            countDownLatch.await();
 //            System.out.println("线程 " + thread.getName() + " start 。。。 ");
         }
+
+    }
+
+    @Test
+    public void m4() {
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                System.out.println("run method ... ");
+            }
+        };
+        runnable.run();
+        Executors.newCachedThreadPool();
 
     }
 

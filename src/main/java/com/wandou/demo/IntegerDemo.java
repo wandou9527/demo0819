@@ -105,4 +105,40 @@ public class IntegerDemo {
         int b = a / 60;
         System.out.println(b);
     }
+
+    /**
+     * 判断一个数是2的次方
+     * https://www.cnblogs.com/daisy0707/p/5279078.html
+     *
+     * @param
+     * @return
+     */
+    @Test
+    public void isPower() {
+        // 1 是 2 的 0 次方
+        int n = 1;
+        if (n < 1) {
+            System.out.println(false);
+            return;
+        }
+        int i = 1;
+        while (i <= n) {
+            if (i == n) {
+                System.out.println(true);
+                return;
+            }
+            i <<= 1;
+        }
+        System.out.println(false);
+
+    }
+
+    @Test
+    public void isPower1() {
+        // 1 是 2 的 0 次方
+        int n = 128;
+        int target = n & (n - 1);
+        System.out.println(target == 0);
+
+    }
 }
