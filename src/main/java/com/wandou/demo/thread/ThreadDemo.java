@@ -25,8 +25,6 @@ public class ThreadDemo {
     private static ThreadPoolExecutor threadPool = new ThreadPoolExecutor(5,
             10, DateUtils.MILLIS_PER_DAY, TimeUnit.MILLISECONDS, blockingQueue);
 
-    private ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(2);
-
     public static void main(String[] args) throws InterruptedException {
         for (int i = 0; i < 100; i++) {
 //            m2Pool();
