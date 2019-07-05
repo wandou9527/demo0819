@@ -84,7 +84,7 @@ public class CompletableFeatureDemo {
             System.out.println(Thread.currentThread().getName() + " 就绪 ...");
             System.out.println("线程池 ActiveCount：" + threadPoolExecutor.getActiveCount());
             try {
-                for (int j = 0; j < 1000; j++) {
+                for (int j = 0; j < 10; j++) {
                     String format = DateUtil.format(new Date());
                     System.out.println(format + " " + Thread.currentThread().getName() + "运行 。。。");
                 }

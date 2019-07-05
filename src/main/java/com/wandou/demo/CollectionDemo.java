@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import java.util.*;
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 
 public class CollectionDemo {
@@ -156,6 +157,32 @@ public class CollectionDemo {
         for (int i = 0; i < size; i++) {
             System.out.println(threadUnsafeList.get(i));
         }
+    }
+
+    /**
+     * 队列
+     */
+    @Test
+    public void m7() throws InterruptedException {
+        LinkedBlockingQueue linkedBlockingQueue = new LinkedBlockingQueue(2);
+        linkedBlockingQueue.offer(1);
+        linkedBlockingQueue.offer(2);
+        boolean offer = linkedBlockingQueue.offer(3);
+        System.out.println("offer 添加返回 Boolean " + offer);
+        System.out.println("队列 " + linkedBlockingQueue);
+//        linkedBlockingQueue.add(4);
+        Object poll = linkedBlockingQueue.poll();
+        System.out.println("poll 取出 " + poll);
+
+        Object peek = linkedBlockingQueue.peek();
+        System.out.println("peek 取出 " + peek);
+
+        Object poll1 = linkedBlockingQueue.poll();
+        System.out.println("poll1 取出 " + poll1);
+        // take取出方法会阻塞
+        Object take = linkedBlockingQueue.take();
+        System.out.println("take 取出 " + take);
+        System.out.println("队列 " + linkedBlockingQueue);
     }
 
 }

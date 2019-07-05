@@ -37,7 +37,7 @@ public class IntegerDemo {
      */
     @Test
     public void weiYunSuan() {
-        int a = 2 << 4;
+        int a = 2 << 1;
         System.out.println(a);
 
         //Integer.highestOneBit是用来获取最左边的bit（其他bit位为0）所代表的数值.

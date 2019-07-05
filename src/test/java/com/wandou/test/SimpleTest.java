@@ -46,7 +46,10 @@ public class SimpleTest {
         System.out.println(convert1);
         Boolean convert2 = converter.convert(null);
         System.out.println(convert2);
+    }
 
-
+    @Test
+    public void m3() {
+        System.out.println(12 % 2);
     }
 }
