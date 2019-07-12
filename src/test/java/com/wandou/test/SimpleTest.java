@@ -2,6 +2,7 @@ package com.wandou.test;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.wandou.model.Book;
 import org.junit.Test;
 import org.redisson.RedissonLock;
 import org.springframework.data.redis.connection.convert.LongToBooleanConverter;
@@ -32,6 +33,11 @@ public class SimpleTest {
 
         JSONObject jsonObject1 = new JSONObject();
         jsonObject1.toString();
+
+        Book book = new Book();
+        book.setName("天龙八部");
+        book.setPrice(668L);
+        System.out.println("book: " + JSON.toJSONString(book));
     }
 
     /**
