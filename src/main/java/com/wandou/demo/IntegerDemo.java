@@ -12,6 +12,10 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
+/**
+ * revert后要加点东西才能提交，revert之后提交push等去除的内容远程没有去除。。
+ */
+
 public class IntegerDemo {
 
     private AtomicInteger atomicInteger = new AtomicInteger(10);

@@ -11,6 +11,10 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 
+/**
+ * 回滚revert之后有个空三角形
+ */
+
 public class CollectionDemo {
     private final ArrayList<Long> threadUnsafeList = new ArrayList<>();
 
