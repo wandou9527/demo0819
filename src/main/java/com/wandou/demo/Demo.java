@@ -9,6 +9,9 @@ import org.junit.Test;
 
 import javax.servlet.GenericServlet;
 import java.util.*;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author liming
@@ -18,6 +21,8 @@ import java.util.*;
  */
 
 public class Demo {
+
+
     public static void main(String[] args) {
         boolean b = ifStr("22");
         System.out.println(b);
@@ -97,5 +102,29 @@ public class Demo {
 
     //测验的基础，公共的（下面有：a 分支 看能否保留；）
     //a 分支 看能否保留
+
+    /**
+     * 延时执行线程池 定时任务
+     */
+    @Test
+    public void m7() throws InterruptedException {
+        ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(5);
+
+        scheduledExecutorService.schedule(new Runnable() {
+            @Override
+            public void run() {
+                System.out.println("延时线程池执行");
+            }
+        }, 5, TimeUnit.SECONDS);
+
+        scheduledExecutorService.scheduleAtFixedRate(new Runnable() {
+            @Override
+            public void run() {
+                System.out.println("延时线程池执行2");
+            }
+        }, 5, 5, TimeUnit.SECONDS);
+
+        Thread.sleep(60000L);
+    }
 
 }

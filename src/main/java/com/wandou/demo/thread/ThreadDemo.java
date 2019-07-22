@@ -191,7 +191,7 @@ public class ThreadDemo {
 
     @Test
     public void m5bTest() throws InterruptedException {
-        int threadNum = 1000;
+        int threadNum = 2000;
         List list = new ArrayList();
         LinkedBlockingQueue<Integer> queue = new LinkedBlockingQueue(threadNum);
         final int[] arr = {0};
@@ -204,8 +204,8 @@ public class ThreadDemo {
             }
         };
         m5a(threadNum, 0, runnable);
-        System.out.println(queue.size());
-        System.out.println(queue);
+        System.out.println("queue size: " + queue.size());
+        System.out.println("queue: " + queue);
         System.out.println("list size: " + list.size());
         System.out.println("list: " + list);
         System.out.println("累加结果 " + arr[0]);
