@@ -2,9 +2,9 @@ package com.wandou.test;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.wandou.enums.OrderEnum;
 import com.wandou.model.Book;
 import org.junit.Test;
-import org.redisson.RedissonLock;
 import org.springframework.data.redis.connection.convert.LongToBooleanConverter;
 
 /**
@@ -37,6 +37,7 @@ public class SimpleTest {
         Book book = new Book();
         book.setName("天龙八部");
         book.setPrice(668L);
+        System.out.println("=============");
         System.out.println("book: " + JSON.toJSONString(book));
     }
 
@@ -57,5 +58,16 @@ public class SimpleTest {
     @Test
     public void m3() {
         System.out.println(12 % 2);
+    }
+
+    /**
+     * 枚举
+     */
+    @Test
+    public void m4() {
+        System.out.println(OrderEnum.ORDER_ENUM);
+        System.out.println(OrderEnum.TypeEnum.GROUP);
+        System.out.println(OrderEnum.StatusEnum.PAY_SUCCESS);
+        System.out.println("字符串啦啦啦");
     }
 }

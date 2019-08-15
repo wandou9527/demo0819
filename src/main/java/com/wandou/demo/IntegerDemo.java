@@ -7,7 +7,6 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -144,5 +143,14 @@ public class IntegerDemo {
         int target = n & (n - 1);
         System.out.println(target == 0);
 
+    }
+
+    @Test
+    public void isNumber() {
+        boolean isNum = NumberUtils.isNumber("555");
+        System.out.println(isNum);
+
+        boolean isNum1 = NumberUtils.isNumber("555a");
+        System.out.println(isNum1);
     }
 }

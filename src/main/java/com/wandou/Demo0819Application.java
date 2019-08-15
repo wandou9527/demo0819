@@ -25,7 +25,6 @@ public class Demo0819Application {
     @EnableAsync
     @Configuration
     class TaskPoolConfig {
-
         @Bean("taskExecutor")
         public Executor taskExecutor() {
             ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();

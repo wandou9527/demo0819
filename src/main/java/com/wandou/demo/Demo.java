@@ -6,6 +6,7 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
+import org.springframework.data.redis.core.RedisTemplate;
 
 import javax.servlet.GenericServlet;
 import java.util.*;
@@ -125,6 +126,11 @@ public class Demo {
         }, 5, 5, TimeUnit.SECONDS);
 
         Thread.sleep(60000L);
+    }
+
+    public void m8() {
+        RedisTemplate redisTemplate = new RedisTemplate();
+        redisTemplate.opsForValue().setIfAbsent(null, null);
     }
 
 }

@@ -1,15 +1,12 @@
 package com.wandou.demo;
 
-import org.apache.commons.lang3.CharSet;
-import org.apache.commons.lang3.CharSetUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateFormatUtils;
-import org.apache.logging.log4j.util.Chars;
 import org.junit.Test;
 import org.springframework.util.DigestUtils;
-import org.springframework.web.HttpRequestHandler;
 
 import java.io.UnsupportedEncodingException;
+import java.text.MessageFormat;
 import java.util.Base64;
 import java.util.Date;
 import java.util.Random;
@@ -103,5 +100,14 @@ public class StrDemo {
     public void m4() {
         String substring = StringUtils.substring("2019-05-29 12:00:00", 0, 10);
         System.out.println(substring); // 2019-05-29
+    }
+
+    @Test
+    public void m5() {
+        String format = MessageFormat.format("a{0}a{1}a", "0", 1);
+        System.out.println(format); // a0a1a
+
+        String format1 = String.format("a%sa%da", 1, 2);
+        System.out.println(format1);
     }
 }
