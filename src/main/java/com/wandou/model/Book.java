@@ -1,5 +1,7 @@
 package com.wandou.model;
 
+import java.io.Serializable;
+
 /**
  * @author: liming
  * @date: 2019/7/12 13:50
@@ -7,7 +9,7 @@ package com.wandou.model;
  * @modify:
  */
 
-public class Book {
+public class Book implements Serializable {
     private String name;
     private Long price;
 

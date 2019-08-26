@@ -1,10 +1,22 @@
-spring:
-  profiles:
-    active: dev
 server:
   port: 8081
 -Xms: 40960m
 -Xmx: 40960m
 -Xmn: 40960m
+spring:
+  profiles:
+    active: dev
+  redis:
+    database: 0
+    host: 47.93.97.169
+    port: 6379
+    password: root1
+    lettuce:
+      pool:
+        max-active: 8
+        max-idle: 8
+        max-wait: -1ms
+        min-idle: 0
+      shutdown-timeout:
 
 
