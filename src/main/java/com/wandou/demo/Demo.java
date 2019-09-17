@@ -133,4 +133,26 @@ public class Demo {
         redisTemplate.opsForValue().setIfAbsent(null, null);
     }
 
+    /**
+     * char 的默认值？ '\u0000'
+     */
+    @Test
+    public void m9Char() {
+        char minValue = Character.MIN_VALUE;
+        System.out.println("--- " + minValue);
+        System.out.println("--- " + (int) minValue);
+        System.out.println("--- " + Character.MAX_VALUE);
+        System.out.println("--- " + (int) Character.MAX_VALUE);
+    }
+
+    @Test
+    public void m10() {
+        String pre = "alter table account_";
+//        String suffix = " add un_due_point bigint default 0 not null comment '未过期积分';";
+        String suffix = " modify un_due_point bigint default 0 not null comment '未过期积分' after authorize_point;";
+        for (int i = 0; i < 32; i++) {
+            System.out.println(pre + i + suffix);
+        }
+    }
+
 }
