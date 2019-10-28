@@ -1,7 +1,10 @@
 package com.wandou.demo;
 
+import com.alibaba.fastjson.JSON;
 import com.wandou.enums.AEnum;
 import com.wandou.enums.AlipayTradeStatusEnum;
+import com.wandou.model.BankOrderDTO;
+import com.wandou.model.Book;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -153,6 +156,40 @@ public class Demo {
         for (int i = 0; i < 32; i++) {
             System.out.println(pre + i + suffix);
         }
+    }
+
+
+    @Test
+    public void m11() {
+        Book book = JSON.parseObject(null, Book.class);
+        System.out.println(JSON.toJSONString(book));
+
+        System.out.println(JSON.toJSONString(JSON.parseObject("", Book.class)));
+
+        BankOrderDTO bankOrderDTO = JSON.parseObject("{\n" +
+                "\t\"bankAssetsNo\": \"201910181105122592416013298\",\n" +
+                "\t\"bankCode\": \"JC\",\n" +
+                "\t\"bankName\": \"金城银行\",\n" +
+                "\t\"channelCode\": \"1\",\n" +
+                "\t\"channelUserId\": \"1000102242\",\n" +
+                "\t\"expireTime\": \"\",\n" +
+                "\t\"holdingAmount\": \"1000.00\",\n" +
+                "\t\"id\": 4054,\n" +
+                "\t\"idCardNo\": \"612729198806211820\",\n" +
+                "\t\"interestTime\": \"\",\n" +
+                "\t\"orderNo\": \"201910181105122592416013298\",\n" +
+                "\t\"orderStatus\": \"2\",\n" +
+                "\t\"periodDesc\": null,\n" +
+                "\t\"productName\": \"金慧存04期\",\n" +
+                "\t\"profit\": \"4.25\",\n" +
+                "\t\"spendAmount\": \"1000.00\",\n" +
+                "\t\"spendTime\": \"2019-10-18 11:05:12\",\n" +
+                "\t\"productId\": 254\n" +
+                "}", BankOrderDTO.class);
+        System.out.println(bankOrderDTO);
+        System.out.println(JSON.toJSONString(bankOrderDTO));
+
+
     }
 
 }

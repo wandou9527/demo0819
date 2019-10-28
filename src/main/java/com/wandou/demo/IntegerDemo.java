@@ -52,6 +52,13 @@ public class IntegerDemo {
         System.out.println(Integer.MAX_VALUE);
 
         System.out.println(9 & 5);
+
+        int b = 15 << 1;
+        System.out.println("15 << 1: " + b);
+        System.out.println("15 >> 1: " + (15 >> 1));
+
+        System.out.println("3 << 1: " + (3 << 1));
+        System.out.println("3 >> 1: " + (3 >> 1));
     }
 
     @Test
@@ -152,5 +159,18 @@ public class IntegerDemo {
 
         boolean isNum1 = NumberUtils.isNumber("555a");
         System.out.println(isNum1);
+    }
+
+    /**
+     * 积分分表计算
+     */
+    @Test
+    public void m7() {
+        // account user_id 计算
+        System.out.println(1000066836 % 32);
+        System.out.println(18260 % 32);
+        System.out.println(1000104836 % 32);
+        // order account_id 计算
+        System.out.println(new Long(381477906268524544L).hashCode() % 32);
     }
 }

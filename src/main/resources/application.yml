@@ -18,5 +18,11 @@ spring:
         max-wait: -1ms
         min-idle: 0
       shutdown-timeout:
-
+wandou:
+  cow:
+    age: 8
+    color: 黄
+    addr: 兴胜村
+    desc: 我是一个牛🐂，来自老百姓
+    name: 风清扬
 
