@@ -4,8 +4,11 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.wandou.enums.OrderEnum;
 import com.wandou.model.Book;
+import com.wandou.model.MemberPrivilege;
 import org.junit.Test;
 import org.springframework.data.redis.connection.convert.LongToBooleanConverter;
+
+import java.math.BigDecimal;
 
 /**
  * @author: liming
@@ -69,5 +72,31 @@ public class SimpleTest {
         System.out.println(OrderEnum.TypeEnum.GROUP);
         System.out.println(OrderEnum.StatusEnum.PAY_SUCCESS);
         System.out.println("字符串啦啦啦");
+    }
+
+
+    @Test
+    public void m5() {
+        System.out.println(JSON.toJSONString(new MemberPrivilege()));
+    }
+
+    @Test
+    public void m6() {
+        BigDecimal bigDecimal = new BigDecimal(1.05);
+        BigDecimal bigDecimal1 = null;
+        BigDecimal bigDecimal2 = new BigDecimal(2.1);
+
+        if (bigDecimal1 == null) {
+            bigDecimal1 = BigDecimal.ZERO;
+        }
+
+        System.out.println(bigDecimal.add(bigDecimal1).add(bigDecimal2).setScale(2, BigDecimal.ROUND_CEILING));
+    }
+
+    @Test
+    public void m7() {
+        System.out.println(1000129142 % 32);
+        System.out.println(1000108736 % 32);
+        System.out.println(1800002936 % 32);
     }
 }

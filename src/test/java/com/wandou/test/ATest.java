@@ -31,7 +31,7 @@ public class ATest {
 
     @Test
     public void m1() {
-        String index = indexController.index();
+        String index = indexController.index(1L);
         System.out.println(index);
     }
 

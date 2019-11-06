@@ -41,7 +41,7 @@ public class ProxyJdk {
                         System.out.println("前置增强");
 
                         Object invoke = method.invoke(target, args);
-
+                        invoke = invoke + " 运行后 返回值加增强";
                         //对返回值修改，后置增强
                         System.out.println("后置增强");
 
