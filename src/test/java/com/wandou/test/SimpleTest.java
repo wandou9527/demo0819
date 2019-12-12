@@ -99,4 +99,16 @@ public class SimpleTest {
         System.out.println(1000108736 % 32);
         System.out.println(1800002936 % 32);
     }
+
+    /**
+     * BigDecimal
+     */
+    @Test
+    public void m8BigDecimal() {
+        BigDecimal bigDecimal = new BigDecimal(0.5);
+        BigDecimal bigDecimal1 = new BigDecimal(0.1551);
+        bigDecimal = bigDecimal.add(bigDecimal1);
+//        bigDecimal = bigDecimal.add(new BigDecimal(0.09));
+        System.out.println(bigDecimal.setScale(2, BigDecimal.ROUND_HALF_UP));
+    }
 }

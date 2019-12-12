@@ -34,7 +34,7 @@ public class Demo0819Application {
             executor.setMaxPoolSize(20);
             executor.setQueueCapacity(200);
             executor.setKeepAliveSeconds(60);
-            executor.setThreadNamePrefix("taskExecutor-");
+            executor.setThreadNamePrefix("taskExecutor-wandou-");
             executor.setRejectedExecutionHandler(new ThreadPoolExecutor.CallerRunsPolicy());
             return executor;
         }

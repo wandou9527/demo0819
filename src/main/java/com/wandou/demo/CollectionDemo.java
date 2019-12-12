@@ -1,6 +1,8 @@
 package com.wandou.demo;
 
+import com.alibaba.fastjson.JSON;
 import com.wandou.demo.thread.ThreadDemo;
+import com.wandou.model.dto.MemberPrivilegeDTO;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -9,7 +11,8 @@ import org.junit.Test;
 import java.util.*;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.ThreadPoolExecutor;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * 回滚revert之后有个空三角形
@@ -187,6 +190,52 @@ public class CollectionDemo {
         Object take = linkedBlockingQueue.take();
         System.out.println("take 取出 " + take);
         System.out.println("队列 " + linkedBlockingQueue);
+    }
+
+    @Test
+    public void m8Sort() {
+        long id = 0L;
+        MemberPrivilegeDTO memberPrivilegeDTO = MemberPrivilegeDTO.builder()
+                .id(++id)
+                .isReceive(0)
+                .effectStart(new Date(10))
+                .build();
+        MemberPrivilegeDTO memberPrivilegeDTO1 = MemberPrivilegeDTO.builder()
+                .id(++id)
+                .isReceive(1)
+                .effectStart(new Date(9))
+                .build();
+        MemberPrivilegeDTO memberPrivilegeDTO2 = MemberPrivilegeDTO.builder()
+                .id(++id)
+                .isReceive(0)
+                .effectStart(new Date(5))
+                .build();
+
+        List<MemberPrivilegeDTO> list = new ArrayList();
+        list.add(memberPrivilegeDTO);
+        list.add(memberPrivilegeDTO1);
+        list.add(memberPrivilegeDTO2);
+
+        List<MemberPrivilegeDTO> resultList = list.stream()
+                .sorted(Comparator.comparing(MemberPrivilegeDTO::getIsReceive).thenComparing(MemberPrivilegeDTO::getEffectStart))
+                .collect(Collectors.toList());
+
+        System.out.println("list = " + JSON.toJSONString(list, true));
+        System.out.println("resultList = " + JSON.toJSONString(resultList, true));
+
+        Stream<MemberPrivilegeDTO> listStream = list.stream();
+//        List<MemberPrivilegeDTO> tmpList = listStream.filter(m -> m.getIsReceive() == 1).collect(Collectors.toList());
+//        List<MemberPrivilegeDTO> tmpList1 = listStream.filter(m -> m.getIsReceive() != 1).collect(Collectors.toList());
+
+//        List<MemberPrivilegeDTO> resultList1 = Stream.concat(tmpList.stream(), tmpList1.stream()).collect(Collectors.toList());
+//        System.out.println("resultList1 = " + JSON.toJSONString(resultList1, true));
+
+        Stream<MemberPrivilegeDTO> tmpStream = listStream.filter(m -> m.getIsReceive() == 1);
+        Stream<MemberPrivilegeDTO> tmpStream1 = listStream.filter(m -> m.getIsReceive() != 1);
+        List<MemberPrivilegeDTO> resultList1 = Stream.concat(tmpStream, tmpStream1).collect(Collectors.toList());
+        System.out.println("resultList1 = " + JSON.toJSONString(resultList1, true));
+
+
     }
 
 }

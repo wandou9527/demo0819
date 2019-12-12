@@ -1,7 +1,9 @@
 package com.wandou.test;
 
+import com.wandou.config.PropertiesConfig;
 import com.wandou.controller.IndexController;
 import com.wandou.demo.thread.CompletableFeatureDemo;
+import com.wandou.demo.thread.Demo9;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +28,11 @@ public class ATest {
     private IndexController indexController;
     @Autowired
     private CompletableFeatureDemo completableFeatureDemo;
+
+    @Autowired
+    private PropertiesConfig propertiesConfig;
+    @Autowired
+    private Demo9 demo9;
 
     private int anInt = 0;
 
@@ -81,6 +88,26 @@ public class ATest {
         countDownLatch.await();
         System.out.println("主线程结束");
 
+    }
+
+    /**
+     * 测试配置信息 private get
+     */
+    @Test
+    public void testProperties() {
+        String a = propertiesConfig.getA();
+        System.out.println(a);
+    }
+
+    /**
+     * 异步线程池
+     */
+    @Test
+    public void m9() throws InterruptedException {
+        demo9.asyncTaskTest();
+        System.out.println("主线程");
+        Thread.sleep(3L);
+        return;
     }
 
 }

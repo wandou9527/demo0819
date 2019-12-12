@@ -1,5 +1,8 @@
 package com.wandou.demo.thread;
 
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.stereotype.Component;
+
 import java.util.List;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.RejectedExecutionHandler;
@@ -11,6 +14,8 @@ import java.util.concurrent.TimeUnit;
 /**
  * 线程池的使用
  */
+
+@Component
 public class Demo9 {
 
     /**
@@ -287,5 +292,13 @@ public class Demo9 {
 //		new Demo9().threadPoolExecutorTest6();
 //		new Demo9().threadPoolExecutorTest7();
 //		new Demo9().threadPoolExecutorTest8();
+    }
+
+    @Async("taskExecutor")
+    public void asyncTaskTest() {
+        for (int i = 0; i < 10; i++) {
+            System.out.println("Thread.currentThread().getName() = " + Thread.currentThread().getName());
+            System.out.println("异步 " + i);
+        }
     }
 }

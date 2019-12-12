@@ -5,6 +5,7 @@ import com.wandou.common.Constant;
 import com.wandou.common.XParamsArgument;
 import com.wandou.enums.XParamsType;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.Around;
@@ -43,6 +44,8 @@ public class DAspect {
         System.out.println("args " + Arrays.asList(args));
         Signature signature = proceedingJoinPoint.getSignature();
         System.out.println("signature = " + signature);
+        // Signature 这里切的是方法 Signature为org.springframework.aop.aspectj.MethodInvocationProceedingJoinPoint$MethodSignatureImpl（内部类）
+        System.out.println("signature.getClass() = " + signature.getClass());
         Class<?> clazz = proceedingJoinPoint.getTarget().getClass();
         Class[] parameterTypes = ((MethodSignature) signature).getParameterTypes();
         Method method = clazz.getMethod(signature.getName(), parameterTypes);
@@ -59,8 +62,11 @@ public class DAspect {
             Parameter parameter = parameters[i];
             if (parameter.getAnnotation(XParam.class) != null) {
 //                arg = new Long(666L);//不好使
+                Long uid = 0L;
                 String token = request.getHeader("token");
-                Long uid = Constant.tokenUserIdMap.get(token);
+                if (StringUtils.isNotBlank(token)) {
+                    uid = Constant.tokenUserIdMap.get(token);
+                }
 //                args[i] = new Long(666L);//好使
                 args[i] = uid;
                 break;

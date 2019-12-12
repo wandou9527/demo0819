@@ -90,6 +90,7 @@ public class IntegerDemo {
         System.out.println("sum is:" + nums.stream().filter(num -> num != null).distinct().mapToInt(num -> num * 2).peek(System.out::println).skip(2).limit(4).sum());
 
         Stream<Integer> stream = nums.stream();
+        System.out.println("stream.count() = " + stream.filter(num -> num == null).count());
 //        stream.collect(Collectors.toMap(a -> a + 5, a -> a));
         Stream<Integer> filterStream = stream.filter(a -> a != null);
         //第一个函数生成一个新的ArrayList实例；

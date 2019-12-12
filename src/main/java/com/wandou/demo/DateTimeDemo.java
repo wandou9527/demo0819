@@ -8,6 +8,7 @@ import org.joda.time.DateTimeZone;
 import org.junit.Test;
 import sun.util.calendar.BaseCalendar;
 
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
@@ -35,10 +36,13 @@ public class DateTimeDemo {
         }
     }
 
+    /**
+     * joda
+     */
     @Test
     public void m1() {
         //org.joda.time.DateTime
-        DateTime dateTime = new DateTime(2018, 9, 15, 12, 00, 00);
+        DateTime dateTime = new DateTime(2018, 9, 15, 12, 0, 0);
         DateTimeZone zone = dateTime.getZone();
         System.out.println(zone);
         System.out.println(dateTime.toString("yyyy-MM-dd"));
@@ -48,11 +52,16 @@ public class DateTimeDemo {
 
         DateTime dateTime2 = DateTime.now(DateTimeZone.UTC);
         System.out.println(dateTime2);
+        System.out.println("dateTime2.getZone(): " + dateTime2.getZone());
 
         TimeZone aDefault = TimeZone.getDefault();
         System.out.println(aDefault);
     }
 
+    /**
+     * org.apache.commons.lang3.time.DateUtils
+     * getFragmentInMilliseconds()
+     */
     @Test
     public void m2() {
 //        Locale locale = new DateTimeFormatter().getLocale();
@@ -88,6 +97,22 @@ public class DateTimeDemo {
         calendar.add(Calendar.MONTH, 2);
         System.out.println(calendar);
         System.out.println(DateFormatUtils.format(calendar, "yyyy-MM"));
+
+    }
+
+    /**
+     * jdk8 datetime
+     */
+    @Test
+    public void m3() {
+        LocalDateTime localDateTime = LocalDateTime.now();
+        System.out.println("localDateTime = " + localDateTime);
+        System.out.println("localDateTime.plusMonths(3) = " + localDateTime.plusMonths(3));
+        System.out.println("localDateTime = " + localDateTime);
+        System.out.println("localDateTime.format(DateTimeFormatter.ofPattern(\"yyyy-MM-dd HH:mm:ss\")) = " + localDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+        System.out.println("localDateTime = " + localDateTime);
+
+        LocalDateTime localDateTime1 = LocalDateTime.now();
 
     }
 }
