@@ -75,6 +75,79 @@ public class WxMaWandouiConfigStorage implements WxMaConfig {
         stringRedisTemplate.opsForValue().set("WEIXINTOKEN:" + wxMaWandouiProperties.getAppId(), accessToken, (expiresInSeconds - 200) * 1000, TimeUnit.MILLISECONDS);
     }
 
+    // TODO 重新impl方法后增加的方法 start
+    @Override
+    public String getJsapiTicket() {
+        return null;
+    }
+
+    @Override
+    public Lock getJsapiTicketLock() {
+        return null;
+    }
+
+    @Override
+    public boolean isJsapiTicketExpired() {
+        return false;
+    }
+
+    /**
+     * 强制将jsapi ticket过期掉
+     */
+    @Override
+    public void expireJsapiTicket() {
+
+    }
+
+    /**
+     * 应该是线程安全的
+     *
+     * @param jsapiTicket      新的jsapi ticket值
+     * @param expiresInSeconds 过期时间，以秒为单位
+     */
+    @Override
+    public void updateJsapiTicket(String jsapiTicket, int expiresInSeconds) {
+
+    }
+
+    /**
+     * 卡券api_ticket.
+     */
+    @Override
+    public String getCardApiTicket() {
+        return null;
+    }
+
+    @Override
+    public Lock getCardApiTicketLock() {
+        return null;
+    }
+
+    @Override
+    public boolean isCardApiTicketExpired() {
+        return false;
+    }
+
+    /**
+     * 强制将卡券api ticket过期掉.
+     */
+    @Override
+    public void expireCardApiTicket() {
+
+    }
+
+    /**
+     * 应该是线程安全的.
+     *
+     * @param apiTicket        新的卡券api ticket值
+     * @param expiresInSeconds 过期时间，以秒为单位
+     */
+    @Override
+    public void updateCardApiTicket(String apiTicket, int expiresInSeconds) {
+
+    }
+    // TODO 重新impl方法后增加的方法 end
+
     @Override
     public String getAppid() {
         return wxMaWandouiProperties.getAppId();
@@ -132,6 +205,8 @@ public class WxMaWandouiConfigStorage implements WxMaConfig {
         return null;
     }
 
+    // TODO 考的xhc的配置实现方法到这里，18个方法，现在提示还有没实现的方法？难道是版本升级了吗？不一样了
+    // TODO public void updateAccessToken(String accessToken, int expiresInSeconds) { 为xhc版本的最后一个方法
     @Override
     public boolean autoRefreshToken() {
         return false;

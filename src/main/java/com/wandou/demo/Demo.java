@@ -8,10 +8,14 @@ import com.wandou.model.Book;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.http.protocol.HTTP;
 import org.junit.Test;
 import org.springframework.data.redis.core.RedisTemplate;
 
 import javax.servlet.GenericServlet;
+import java.net.HttpURLConnection;
+import java.nio.charset.StandardCharsets;
+import java.time.ZoneId;
 import java.util.*;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -190,6 +194,24 @@ public class Demo {
         System.out.println(JSON.toJSONString(bankOrderDTO));
 
 
+    }
+
+    /**
+     * Java 常用常量
+     * Charsets UTF-8
+     * http://blog.sina.com.cn/s/blog_3fba24680102xlxc.html Java中HTTPStatus-Code常量、Charset常量
+     */
+    @Test
+    public void m12() {
+        System.out.println("StandardCharsets.UTF_8 = " + StandardCharsets.UTF_8);
+        System.out.println("StandardCharsets.UTF_8.toString() = " + StandardCharsets.UTF_8.toString());
+        System.out.println("StandardCharsets.UTF_8.aliases() = " + StandardCharsets.UTF_8.aliases());
+        System.out.println("StandardCharsets.UTF_8.name() = " + StandardCharsets.UTF_8.name());
+
+        String ctt = ZoneId.SHORT_IDS.get("CTT");
+        System.out.println("ctt = " + ctt);
+
+        System.out.println("HTTP.UTF_8 = " + HTTP.UTF_8);
     }
 
 }

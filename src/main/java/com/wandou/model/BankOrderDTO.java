@@ -17,7 +17,7 @@ public class BankOrderDTO {
     //银行编码
     private String bankCode;
     private String bankName;
-    //0钱包 1悟空 channelCode 0 代表用户是在钱包购买的，1代表用户在悟空购买的
+    //channelCode 0 代表用户是在钱包购买的，1代表用户在悟空购买的
     private Integer channelCode;
     //渠道用户ID
     private String channelUserId;
