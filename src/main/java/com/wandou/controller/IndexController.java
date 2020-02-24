@@ -1,12 +1,17 @@
 package com.wandou.controller;
 
 import com.wandou.annotation.XParam;
-import com.wandou.cowspringbootstarter.dto.CowDTO;
+//import com.wandou.cowspringbootstarter.dto.CowDTO;
 import com.wandou.enums.XParamsType;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.time.DateFormatUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.RequestAttributes;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -15,28 +20,28 @@ import java.util.Map;
  * 2018-8-22
  */
 
+@Slf4j
 @RestController
 @RequestMapping(value = "index")
 public class IndexController {
-    @Autowired
-    private CowDTO cowDTO;
+//    @Autowired
+//    private CowDTO cowDTO;
 
     @RequestMapping("/index")
     public String index(@XParam(XParamsType.UID) Long uid) {
-        System.out.println("有人访问！" + uid);
+        log.info("有人访问！{}", uid);
         return "欢迎光临！" +
                 "今天是 " + DateFormatUtils.format(new Date(), "yyyy-MM-dd");
     }
 
-//    @RequestMapping("/cow")
-    @GetMapping("cow")
-    public Object cowStarter(@RequestHeader(name = "userId", required = false) Long userId, @RequestAttribute(value = "userIdA", required = false) Long userIdA) {
-        Map<String, Object> resp = new HashMap<>();
-        resp.put("cow", cowDTO);
-        resp.put("userId", userId);
-        resp.put("userIdA", userIdA);
-        return resp;
-    }
+//    @GetMapping("cow")
+//    public Object cowStarter(@RequestHeader(name = "userId", required = false) Long userId, @RequestAttribute(value = "userIdA", required = false) Long userIdA) {
+//        Map<String, Object> resp = new HashMap<>();
+//        resp.put("cow", cowDTO);
+//        resp.put("userId", userId);
+//        resp.put("userIdA", userIdA);
+//        return resp;
+//    }
 
     /**
      * XParam实验
@@ -49,4 +54,27 @@ public class IndexController {
         Long uid2 = uid;
         return uid2;
     }
+
+    @PostMapping("/m3")
+    public Object m3() {
+        RequestAttributes ra = RequestContextHolder.getRequestAttributes();
+        ServletRequestAttributes sra = (ServletRequestAttributes) ra;
+        HttpServletRequest request = sra.getRequest();
+        String data = request.getParameter("data");
+        return data;
+    }
+
+    /**
+     * 测试阿里云tool部署服务器
+     * 2020-02-24
+     *
+     * @param param
+     * @return
+     */
+    @GetMapping("/ali_tool")
+    public Object m4(@RequestParam(required = false) String param) {
+        return "ali_tool" + param;
+    }
+
+
 }

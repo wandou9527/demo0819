@@ -1,6 +1,7 @@
 package com.wandou.common;
 
 import com.wandou.annotation.XParam;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.HttpStatus;
@@ -15,17 +16,20 @@ import org.springframework.web.method.support.ModelAndViewContainer;
  * xhc
  * 方法的扩展参数信息标志,这个参数可指定用户编号，角色，触发场景等
  */
+
+@Slf4j
 @Component
 public class XParamsArgument implements HandlerMethodArgumentResolver {
 
     @Override
     public boolean supportsParameter(MethodParameter parameter) {
-//        return parameter.hasParameterAnnotation(XParam.class);
-        return true;
+        log.info("进入 supportsParameter()");
+        return parameter.hasParameterAnnotation(XParam.class);
     }
 
     /**
      * 不好使呢
+     * 2020-01-17 好使了，需要 com.wandou.config.MyWebMVCConfig#addArgumentResolvers(java.util.List)
      *
      * @param parameter
      * @param mavContainer

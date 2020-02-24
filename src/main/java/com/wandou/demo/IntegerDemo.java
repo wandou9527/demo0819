@@ -4,6 +4,7 @@ import org.apache.commons.lang3.math.NumberUtils;
 import org.assertj.core.util.Lists;
 import org.junit.Test;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -173,5 +174,39 @@ public class IntegerDemo {
         System.out.println(1000104836 % 32);
         // order account_id 计算
         System.out.println(new Long(381477906268524544L).hashCode() % 32);
+    }
+
+    /**
+     * BigDecimal
+     */
+    @Test
+    public void m8() {
+        double d = 1000.00;
+        System.out.println(d / 360 * 180 * 0.009f * 100);
+
+        System.out.println(new BigDecimal(1000)
+                .divide(new BigDecimal(360), 2, BigDecimal.ROUND_HALF_DOWN)
+                .multiply(new BigDecimal(180))
+                .multiply(new BigDecimal(0.009))
+                .multiply(new BigDecimal(100))
+                .intValue());
+
+        System.out.println(new BigDecimal(20).divide(new BigDecimal(3), 3, BigDecimal.ROUND_DOWN));
+        System.out.println(new BigDecimal(1000).divide(new BigDecimal(360), 3, BigDecimal.ROUND_CEILING));
+        System.out.println(new BigDecimal(1000).divide(new BigDecimal(360), 3, BigDecimal.ROUND_FLOOR));
+        System.out.println(new BigDecimal(1000).divide(new BigDecimal(360), 3, BigDecimal.ROUND_HALF_UP));
+        System.out.println("5 ROUND_HALF_DOWN " + new BigDecimal(1000).divide(new BigDecimal(360), 3, BigDecimal.ROUND_HALF_DOWN));
+        System.out.println("6 ROUND_HALF_EVEN " + new BigDecimal(1000).divide(new BigDecimal(360), 3, BigDecimal.ROUND_HALF_EVEN));
+
+        System.out.println(new BigDecimal(100).divide(new BigDecimal(5)));
+
+        System.out.println("new BigDecimal(0.1f) = " + new BigDecimal(0.1f));
+        System.out.println("new BigDecimal(\"0.1\") = " + new BigDecimal("0.1"));
+        System.out.println("BigDecimal.valueOf(0.1) = " + BigDecimal.valueOf(0.1));
+
+        System.out.println("10 * 0.1 = " + 10 * 0.1);
+        System.out.println("0.9 + 0.1 = " + (0.9 + 0.1));
+        System.out.println("0.99 + 0.01 = " + (0.99 + 0.01));
+
     }
 }

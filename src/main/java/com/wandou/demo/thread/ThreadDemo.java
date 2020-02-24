@@ -171,6 +171,15 @@ public class ThreadDemo {
         Thread.sleep(3000L);
     }
 
+
+    /**
+     * 提交给多线程执行任务的方法
+     *
+     * @param threadNum
+     * @param circulationNum
+     * @param runnable
+     * @throws InterruptedException
+     */
     public void m5a(int threadNum, int circulationNum, Runnable runnable) throws InterruptedException {
         CountDownLatch countDownLatch = new CountDownLatch(threadNum);
         for (int i = 0; i < threadNum; i++) {
@@ -179,7 +188,7 @@ public class ThreadDemo {
                     System.out.println("线程 " + Thread.currentThread().getName() + " 准备");
                     countDownLatch.countDown(); // 放这里可以，在await前面
                     countDownLatch.await();
-                    System.out.println("线程 " + Thread.currentThread().getName() + " 运行");
+                    System.out.println("时间: " + System.currentTimeMillis() + " 线程 " + Thread.currentThread().getName() + " 运行");
                     runnable.run();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
@@ -191,16 +200,16 @@ public class ThreadDemo {
 
     @Test
     public void m5bTest() throws InterruptedException {
-        int threadNum = 2000;
+        int threadNum = 3000;
         List list = new ArrayList();
         LinkedBlockingQueue<Integer> queue = new LinkedBlockingQueue(threadNum);
         final int[] arr = {0};
         Runnable runnable = new Runnable() {
             @Override
             public void run() {
-                queue.add(new Random().nextInt());
                 list.add(new Random().nextInt());
-                arr[0]++;
+//                queue.add(new Random().nextInt());
+//                arr[0]++;
             }
         };
         m5a(threadNum, 0, runnable);

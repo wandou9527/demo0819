@@ -4,6 +4,7 @@ import com.wandou.config.PropertiesConfig;
 import com.wandou.controller.IndexController;
 import com.wandou.demo.thread.CompletableFeatureDemo;
 import com.wandou.demo.thread.Demo9;
+//import com.wandou.feign.MouseFeign;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +37,9 @@ public class ATest {
 
     private int anInt = 0;
 
+//    @Autowired
+//    private MouseFeign mouseFeign;
+
     @Test
     public void m1() {
         String index = indexController.index(1L);
@@ -65,6 +69,7 @@ public class ATest {
         CompletableFuture.allOf(addCF, addCF2);
         Thread.sleep(5000);
         System.out.println("CompletableFeatureDemo.i 的最终值： " + completableFeatureDemo.getI());
+        System.out.println("completableFeatureDemo.getAtomicInteger() 最终值 = " + completableFeatureDemo.getAtomicInteger());
     }
 
     @Test
@@ -109,5 +114,14 @@ public class ATest {
         Thread.sleep(3L);
         return;
     }
+
+    /**
+     * 试验feign
+     */
+//    @Test
+//    public void m10() {
+//        Object o = mouseFeign.c2Paris();
+//        System.out.println(o);
+//    }
 
 }

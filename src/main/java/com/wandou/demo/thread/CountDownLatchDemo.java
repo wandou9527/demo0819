@@ -8,6 +8,7 @@ package com.wandou.demo.thread;
  */
 
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.atomic.AtomicInteger;
 
 
 public class CountDownLatchDemo {
@@ -15,6 +16,8 @@ public class CountDownLatchDemo {
     private static CountDownLatch cd = new CountDownLatch(100);
 
     private static final int CONCURRENCE_COUNT = 100 + 1;
+
+    private static AtomicInteger count = new AtomicInteger(0);
 
 
     public static void main(String[] args) {
@@ -51,6 +54,7 @@ public class CountDownLatchDemo {
 
     private static void sendsms() {
         System.out.println("信息发送成功" + System.currentTimeMillis());
+        System.out.println(count.getAndIncrement());
     }
 
 

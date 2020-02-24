@@ -1,6 +1,7 @@
 package com.wandou.demo.thread;
 
 import com.wandou.util.DateUtil;
+import lombok.Getter;
 import org.apache.commons.lang3.time.DateFormatUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Component;
 import java.util.Date;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * @author: liming
@@ -17,6 +19,8 @@ import java.util.concurrent.CountDownLatch;
  * @description: 返回吗 revert
  * @modify:
  */
+
+@Getter
 @Component
 public class CompletableFeatureDemo {
 
@@ -25,6 +29,8 @@ public class CompletableFeatureDemo {
     private ThreadPoolTaskExecutor threadPoolExecutor;
 
     private int i = 0;
+
+    private AtomicInteger atomicInteger = new AtomicInteger(0);
 
     public int getI() {
         return i;
@@ -50,13 +56,21 @@ public class CompletableFeatureDemo {
     }
 
 
+    /**
+     * 累加 两个线程操作一个变量累加
+     *
+     * @return
+     */
     public CompletableFuture<Integer> add() {
         return CompletableFuture.supplyAsync(() -> {
             System.out.println("add CompletableFuture.supplyAsync() 线程 " + Thread.currentThread().getName() + " 开始");
             for (int j = 0; j < 5000; j++) {
                 i++;
+                atomicInteger.incrementAndGet();
             }
+            //一个线程结束时打印变量值 最终值应该等于循环累加次数结果 后停止的线程应该等于最终值，先停止的是那一时刻两个线程操作的结果
             System.out.println("i = " + i + "; 线程: " + Thread.currentThread().getName() + " 结束");
+            System.out.println("atomicInteger = " + atomicInteger + "; 线程： " + Thread.currentThread().getName() + " 结束");
             return 1;
         }, threadPoolExecutor);
     }

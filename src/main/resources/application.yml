@@ -1,5 +1,5 @@
 server:
-  port: 8081
+  port: 8084
 -Xms: 40960m
 -Xmx: 40960m
 -Xmn: 40960m
@@ -26,3 +26,15 @@ wandou:
     desc: 我是一个牛🐂，来自老百姓
     name: 风清扬
 a: aaaaa
+# 是否启用httpclient
+#feign:
+#  httpclient:
+#    enabled: false
+#    # 请求连接超时时间（毫秒）
+#    connection-timeout: 3000
+#  # 是否启用httpok（性能比httpclient高）
+#  okhttp:
+#    enabled: true
+#  # 是否启用hystrix
+#  hystrix:
+#    enabled: true

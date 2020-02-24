@@ -4,6 +4,7 @@ package com.wandou;
 import com.wandou.common.XParamsArgument;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+//import org.springframework.cloud.netflix.feign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -15,6 +16,8 @@ import java.util.TimeZone;
 import java.util.concurrent.Executor;
 import java.util.concurrent.ThreadPoolExecutor;
 
+//@EnableFeignClients
+@EnableAsync
 //@ComponentScan(basePackages = {"com.wandou.*"})
 @SpringBootApplication
 public class Demo0819Application {
@@ -24,7 +27,7 @@ public class Demo0819Application {
         SpringApplication.run(Demo0819Application.class, args);
     }
 
-    @EnableAsync
+
     @Configuration
     class TaskPoolConfig {
         @Bean("taskExecutor")
@@ -40,9 +43,9 @@ public class Demo0819Application {
         }
     }
 
-    @Bean("xParamsArgument")
-    public HandlerMethodArgumentResolver getXParamsArgument() {
-        return new XParamsArgument();
-    }
+//    @Bean("xParamsArgument")
+//    public HandlerMethodArgumentResolver getXParamsArgument() {
+//        return new XParamsArgument();
+//    }
 
 }

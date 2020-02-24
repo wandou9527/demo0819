@@ -6,20 +6,21 @@ import com.wandou.enums.AlipayTradeStatusEnum;
 import com.wandou.model.BankOrderDTO;
 import com.wandou.model.Book;
 import org.apache.commons.lang3.ArrayUtils;
-import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.protocol.HTTP;
 import org.junit.Test;
 import org.springframework.data.redis.core.RedisTemplate;
 
 import javax.servlet.GenericServlet;
-import java.net.HttpURLConnection;
 import java.nio.charset.StandardCharsets;
 import java.time.ZoneId;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.locks.LockSupport;
 
 /**
  * @author liming
@@ -34,20 +35,12 @@ public class Demo {
     public static void main(String[] args) {
         boolean b = ifStr("22");
         System.out.println(b);
-        m2();
     }
 
     public static boolean ifStr(String str) {
         return StringUtils.isNotBlank(str);
     }
 
-    public static void m2() {
-        Map map = new LinkedHashMap();
-        for (int i = 0; i < 10; i++) {
-            map.put(new Random().nextInt(), RandomStringUtils.randomNumeric(8));
-        }
-        System.out.println(map);
-    }
 
     /**
      * jia shang 2018年8月19日
@@ -212,6 +205,56 @@ public class Demo {
         System.out.println("ctt = " + ctt);
 
         System.out.println("HTTP.UTF_8 = " + HTTP.UTF_8);
+    }
+
+    static class HashMapDemo {
+
+        public static void main(String[] args) {
+
+            LockSupport.unpark(Thread.currentThread());
+
+            LockSupport.park();
+
+            System.out.println("hello");
+
+            LockSupport.unpark(Thread.currentThread());
+
+            LockSupport.unpark(Thread.currentThread());
+
+            LockSupport.park();
+
+            LockSupport.park(); //到此处阻塞 wait
+
+            System.out.println("hello");
+
+        }
+
+    }
+
+    @Test
+    public void m4() {
+        for (int i = 0; i < 10; i++) {
+            System.out.println(i);
+        }
+    }
+
+    @Test
+    public void lanya() {
+        for (int i = 0; i < 10; i++) {
+            System.out.println("蓝牙 " + i);
+            System.out.println("蓝牙 ");
+            System.out.println("蓝牙 Mac" + i);
+            System.out.println("蓝牙 Mac" + i);
+            System.out.println("蓝牙 Mac" + i);
+            System.out.println("蓝牙 Mac" + i);
+            System.out.println("蓝牙 Mac" + i);
+            System.out.println("蓝牙 Mac" + i);
+            System.out.println("蓝牙 Mac" + i);
+            System.out.println("蓝牙 Mac" + i);
+            System.out.println("蓝牙 Mac" + i);
+            System.out.println("蓝牙 Mac" + i);
+
+        }
     }
 
 }

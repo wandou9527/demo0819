@@ -1,5 +1,7 @@
 package com.wandou.model;
 
+import lombok.Data;
+
 import java.io.Serializable;
 
 /**
@@ -9,6 +11,7 @@ import java.io.Serializable;
  * @modify:
  */
 
+@Data
 public class Book implements Serializable {
     private String name;
     private Long price;
@@ -16,19 +19,4 @@ public class Book implements Serializable {
     public Book() {
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Long getPrice() {
-        return price;
-    }
-
-    public void setPrice(Long price) {
-        this.price = price;
-    }
 }

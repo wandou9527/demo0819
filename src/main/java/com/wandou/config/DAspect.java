@@ -37,7 +37,7 @@ import java.util.Arrays;
 @Slf4j
 public class DAspect {
 
-    @Around("@annotation(requestMapping)")
+//    @Around("@annotation(requestMapping)")
     public Object m1(ProceedingJoinPoint proceedingJoinPoint, RequestMapping requestMapping) throws Throwable {
         log.info("requestMapping 切面拦截");
         Object[] args = proceedingJoinPoint.getArgs();
