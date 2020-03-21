@@ -208,5 +208,25 @@ public class RedisTest {
 
     }
 
+    /**
+     * zSet
+     */
+    @Test
+    public void m6ZSet() {
+        String zSetKey1 = "zsetKey1";
+        redisTemplate.opsForZSet().add(zSetKey1, "zValue1", 10);
+        redisTemplate.opsForZSet().add(zSetKey1, "zValue1-a", 1);
+        redisTemplate.opsForZSet().add(zSetKey1, "zValue1-b", 5);
+        redisTemplate.opsForZSet().add(zSetKey1, "zValue1-c", 3);
+        redisTemplate.opsForZSet().add(zSetKey1, "zValue1-d", 4);
+        // score为降序排列
+        Set set = redisTemplate.opsForZSet().range(zSetKey1, 0L, 2L);
+        System.out.println("set = " + set);
+
+        // 倒序查找
+        Set<String> reverseRangeSet = redisTemplate.opsForZSet().reverseRange(zSetKey1, 0, 2);
+        System.out.println("reverseRangeSet = " + reverseRangeSet);
+    }
+
 
 }

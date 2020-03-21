@@ -4,6 +4,7 @@ import com.wandou.annotation.XParam;
 //import com.wandou.cowspringbootstarter.dto.CowDTO;
 import com.wandou.enums.XParamsType;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.time.DateFormatUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -74,6 +75,17 @@ public class IndexController {
     @GetMapping("/ali_tool")
     public Object m4(@RequestParam(required = false) String param) {
         return "ali_tool" + param;
+    }
+
+    /**
+     * 随机数
+     *
+     * @param num
+     * @return
+     */
+    @GetMapping("/random_numeric")
+    public String randomNumeric(@RequestParam(required = false, defaultValue = "6") Integer num) {
+        return "random_numeric: " + RandomStringUtils.randomNumeric(num);
     }
 
 

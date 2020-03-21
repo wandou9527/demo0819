@@ -8,6 +8,8 @@ import org.joda.time.DateTimeZone;
 import org.junit.Test;
 import sun.util.calendar.BaseCalendar;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
@@ -114,5 +116,17 @@ public class DateTimeDemo {
 
         LocalDateTime localDateTime1 = LocalDateTime.now();
 
+    }
+
+    /**
+     * 李兴方法
+     */
+    @Test
+    public void getPreDate() {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(new Date());
+        calendar.set(Calendar.DAY_OF_MONTH, -10);//让日期加1
+        System.out.println(dateFormat.format(calendar.getTime()));
     }
 }

@@ -1,8 +1,8 @@
 server:
   port: 8084
--Xms: 40960m
--Xmx: 40960m
--Xmn: 40960m
+-Xms: 256m
+-Xmx: 2560m
+-Xmn: 256m
 spring:
   profiles:
     active: dev
@@ -38,3 +38,7 @@ a: aaaaa
 #  # 是否启用hystrix
 #  hystrix:
 #    enabled: true
+rocketmq:
+  name-server: 127.0.0.1:9876;a2.wandour.top:9876
+  producer:
+    group: liming-producer-group
