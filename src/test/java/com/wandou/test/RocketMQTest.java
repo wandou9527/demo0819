@@ -83,7 +83,7 @@ public class RocketMQTest {
     public void m3() throws InterruptedException, RemotingException, MQClientException, MQBrokerException {
         Message message = new Message();
         message.setTopic(RocketMQConstant.LIMING_TEST_TOPIC);
-        message.setKeys(atomicInteger.incrementAndGet() + "");
+        message.setKeys("key" + redisUtil.randomIncId());
         message.setTags("boot dan fa");
         message.setBody(("springboot 发 - " + atomicInteger.incrementAndGet()).getBytes());
         SendResult sendResult = defaultMQProducer.send(message);
