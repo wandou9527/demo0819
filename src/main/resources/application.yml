@@ -1,7 +1,7 @@
 server:
   port: 8084
 -Xms: 256m
--Xmx: 2560m
+-Xmx: 256m
 -Xmn: 256m
 spring:
   profiles:

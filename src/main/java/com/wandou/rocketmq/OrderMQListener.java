@@ -14,23 +14,23 @@ import org.springframework.stereotype.Service;
  * @author liming
  * @date 2020-03-20
  */
+
 @Service
 @Slf4j
-@RocketMQMessageListener(topic = RocketMQConstant.LIMING_TEST_TOPIC, consumerGroup = "test-consumer-group")
-public class TestListener implements RocketMQListener<MessageExt>, RocketMQPushConsumerLifecycleListener {
+@RocketMQMessageListener(topic = RocketMQConstant.ORDER_TOPIC, consumerGroup = RocketMQConstant.TEST_CONSUMER_GROUP)
+public class OrderMQListener implements RocketMQListener<MessageExt>, RocketMQPushConsumerLifecycleListener {
     @Override
     public void onMessage(MessageExt message) {
-        log.info("======================= test收到mq消息,msg={}", message);
+        log.info("======================= OrderMQListener收到mq消息,msg={}", message);
         String msgId = message.getMsgId();
-        log.info("msgId: {}, msgKey: {}", msgId, message.getKeys());
         String tags = message.getTags();
-        log.info("tags: {}", JSON.toJSONString(tags));
+        log.info("msgId: {}, msgKey: {}, tags: {}", msgId, message.getKeys(), tags);
         log.info("msgBody: {}", message.getBody());
         log.info("msgBodyStr: {}", new String(message.getBody()));
     }
 
     @Override
     public void prepareStart(DefaultMQPushConsumer consumer) {
-        consumer.setInstanceName(RocketMQConstant.TEST_CONSUMER_GROUP);
+        consumer.setInstanceName(RocketMQConstant.TEST_CONSUMER_GROUP + "InstanceName");
     }
 }

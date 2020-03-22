@@ -1,6 +1,8 @@
 package com.wandou.test;
 
+import com.wandou.common.RedisConstant;
 import com.wandou.common.RocketMQConstant;
+import com.wandou.util.RedisUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.RandomUtils;
@@ -31,6 +33,8 @@ public class RocketMQTest {
 
     @Autowired
     private DefaultMQProducer defaultMQProducer;
+    @Autowired
+    private RedisUtil redisUtil;
 
     private AtomicInteger atomicInteger = new AtomicInteger(0);
 
@@ -54,7 +58,23 @@ public class RocketMQTest {
                 SendResult sendResult = defaultMQProducer.send(message);
                 log.info("sendResult: {}", sendResult);
             }
-            TimeUnit.SECONDS.sleep(RandomUtils.nextLong(30, 40));
+            TimeUnit.SECONDS.sleep(RandomUtils.nextLong(10, 30));
+        }
+    }
+
+
+    @Test
+    public void m2() throws InterruptedException, RemotingException, MQClientException, MQBrokerException {
+        int key = 0;
+        for (int i = 0; i < 100; i++) {
+            for (int j = 0; j < 100000; j++) {
+                Message message = new Message(RocketMQConstant.ORDER_TOPIC,
+                        "oTagA",
+                        "key" + redisUtil.increment(RedisConstant.ROCKET_MQ_MSG_COUNT_KEY, 1L),
+                        ("orderMsg"+ RandomStringUtils.randomNumeric(6)).getBytes());
+                SendResult sendResult = defaultMQProducer.send(message);
+                log.info("OrderSendResult: {}", sendResult);
+            }
         }
     }
 

@@ -5,6 +5,8 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class Constant {
 
+    public static final String APPLICATION_NAME = "demo0819";
+
     public static final Map<String, Long> tokenUserIdMap = new ConcurrentHashMap<>();
     static {
         tokenUserIdMap.put("aaab1", 1L);
