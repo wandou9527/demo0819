@@ -1,6 +1,7 @@
 //package com.wandou.config;
 //
 //import feign.Contract;
+////import org.apache.http.annotation.Contract;
 //import org.springframework.context.annotation.Bean;
 //import org.springframework.context.annotation.Configuration;
 //

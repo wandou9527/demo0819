@@ -1,6 +1,6 @@
 package com.wandou.test;
 
-import com.wandou.common.RedisConstant;
+import com.alibaba.fastjson.JSON;
 import com.wandou.common.RocketMQConstant;
 import com.wandou.util.RedisUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -18,6 +18,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -52,7 +54,7 @@ public class RocketMQTest {
             for (int j = 0; j < 1000; j++) {
                 Message message = new Message();
                 message.setTopic(RocketMQConstant.LIMING_TEST_TOPIC);
-                message.setKeys("" + i + "-" + j + "-");
+                message.setKeys("" + i + "-" + j + "-" + redisUtil.randomIncId());
                 message.setTags("boot fa");
                 message.setBody(("springboot 发 - " + atomicInteger.incrementAndGet()).getBytes());
                 SendResult sendResult = defaultMQProducer.send(message);
@@ -67,11 +69,11 @@ public class RocketMQTest {
     public void m2() throws InterruptedException, RemotingException, MQClientException, MQBrokerException {
         int key = 0;
         for (int i = 0; i < 100; i++) {
-            for (int j = 0; j < 100000; j++) {
+            for (int j = 0; j < 10; j++) {
                 Message message = new Message(RocketMQConstant.ORDER_TOPIC,
                         "oTagA",
-                        "key" + redisUtil.increment(RedisConstant.ROCKET_MQ_MSG_COUNT_KEY, 1L),
-                        ("orderMsg"+ RandomStringUtils.randomNumeric(6)).getBytes());
+                        "key" + redisUtil.randomIncId(),
+                        ("orderMsg" + RandomStringUtils.randomNumeric(6)).getBytes());
                 SendResult sendResult = defaultMQProducer.send(message);
                 log.info("OrderSendResult: {}", sendResult);
             }
@@ -85,7 +87,23 @@ public class RocketMQTest {
         message.setTopic(RocketMQConstant.LIMING_TEST_TOPIC);
         message.setKeys("key" + redisUtil.randomIncId());
         message.setTags("boot dan fa");
-        message.setBody(("springboot 发 - " + atomicInteger.incrementAndGet()).getBytes());
+        message.setBody(("springboot 发 - " + redisUtil.randomIncId()).getBytes());
+        SendResult sendResult = defaultMQProducer.send(message);
+        log.info("sendResult: {}", sendResult);
+
+    }
+
+    @Test
+    public void m4SendToDEMO0819_TOPIC() throws InterruptedException, RemotingException, MQClientException, MQBrokerException {
+        Message message = new Message();
+        message.setTopic(RocketMQConstant.DEMO0819_TOPIC);
+        message.setKeys("key" + redisUtil.randomIncId());
+        message.setTags("boot dan fa");
+        Map<String, Object> msgBodyMap = new HashMap<>();
+        msgBodyMap.put("lala", "springbootDemo0819 mq 发 - " + redisUtil.randomIncId());
+        msgBodyMap.put("userId", null);
+        System.out.println("msgBodyMap = " + msgBodyMap);
+        message.setBody((JSON.toJSONString(msgBodyMap)).getBytes());
         SendResult sendResult = defaultMQProducer.send(message);
         log.info("sendResult: {}", sendResult);
 

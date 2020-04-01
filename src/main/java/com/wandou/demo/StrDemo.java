@@ -77,7 +77,7 @@ public class StrDemo {
         System.out.println("base64ToStr: " + base64ToStr);
 
         String md5DigestAsHex = DigestUtils.md5DigestAsHex(bytes1);
-        System.out.println(md5DigestAsHex);
+        System.out.println("md5DigestAsHex: " + md5DigestAsHex);
     }
 
     @Test
