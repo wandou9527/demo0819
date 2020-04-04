@@ -1,8 +1,8 @@
 server:
   port: 8084
--Xms: 256m
--Xmx: 256m
--Xmn: 256m
+-Xms: 128m
+-Xmx: 128m
+-Xmn: 128m
 spring:
   profiles:
     active: dev

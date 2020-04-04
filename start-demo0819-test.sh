@@ -29,7 +29,7 @@ mvn clean package -Dmaven.test.skip=true
 echo '进入 target 目录'
 cd /java/git_site_self/demo0819/target
 echo 'run java -jar 。。。'
-nohup java -XX:ParallelGCThreads=2 -Djava.compiler=NONE -jar demo0819-1.1-SNAPSHOT.jar --spring.profiles.active=dev &
+nohup java -XX:ParallelGCThreads=2 -Djava.compiler=NONE -jar demo0819-1.1-SNAPSHOT.jar --spring.profiles.active=test &
 sleep 5
 tail -f nohup.out
 sleep 30
