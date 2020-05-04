@@ -7,10 +7,7 @@ import org.springframework.util.DigestUtils;
 
 import java.io.UnsupportedEncodingException;
 import java.text.MessageFormat;
-import java.util.Base64;
-import java.util.Date;
-import java.util.Random;
-import java.util.TimeZone;
+import java.util.*;
 
 public class StrDemo {
     /**
@@ -103,11 +100,38 @@ public class StrDemo {
     }
 
     @Test
-    public void m5() {
+    public void m5Format() {
         String format = MessageFormat.format("a{0}a{1}a", "0", 1);
-        System.out.println(format); // a0a1a
+        System.out.println(format); // 结果 a0a1a
 
-        String format1 = String.format("a%sa%da", 1, 2);
+        String format1 = String.format("a %s ap %d qq", 1, 2);
         System.out.println(format1);
+
+        //%s 会将参数 toString 或 String.valueOf
+        //结果 a2 null ap  qq
+        System.out.println(String.format("a2 %s ap %s qq", null, ""));
+
+        Calendar c = Calendar.getInstance();
+        String s = String.format("Duke's Birthday: %1$tm %1$te,%1$tY", c);
+        System.out.println("s = " + s);
+
+        System.out.println(String.format("b f b: %%", 12));
+    }
+
+    /**
+     * 反转
+     */
+    @Test
+    public void m6ReverseStr() {
+        String str = "abc123";
+        StringBuilder sb = new StringBuilder(str);
+        System.out.println("sb.reverse().toString() = " + sb.reverse().toString());
+
+        int length = str.length();
+        char[] arr = new char[length];
+        for (int i = 0; i < length; i++) {
+            arr[i] = str.charAt(length - 1 - i);
+        }
+        System.out.println("new String(arr) = " + new String(arr));
     }
 }

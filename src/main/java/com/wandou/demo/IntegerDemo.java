@@ -54,6 +54,7 @@ public class IntegerDemo {
 
         System.out.println(9 & 5);
 
+        //左移位 2进制的 扩大 移1位即乘以2
         int b = 15 << 1;
         System.out.println("15 << 1: " + b);
         System.out.println("15 >> 1: " + (15 >> 1));

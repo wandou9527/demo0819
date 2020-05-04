@@ -37,9 +37,9 @@ public class RocketMQDemo {
                 Message message = new Message();
                 message.setTopic(RocketMQConstant.DEMO0819_TOPIC);
                 message.setKeys("key" + redisUtil.randomIncId());
-                message.setTags("matter_log");
-                Map<String, Object> msgBodyMap = new HashMap<>();
-                msgBodyMap.put("lala", "springbootDemo0819 mq 发 - " + redisUtil.randomIncId());
+                message.setTags("matter_log_tag");
+                Map<String, Object> msgBodyMap = new HashMap<>(4);
+                msgBodyMap.put("lala", "springboot Demo0819 mq 发 - " + redisUtil.randomIncId());
                 msgBodyMap.put("userId", RandomUtils.nextInt(1, 31));
                 msgBodyMap.put("mType", RandomUtils.nextInt(1, 4));
                 log.info("msgBodyMap: {}", msgBodyMap);

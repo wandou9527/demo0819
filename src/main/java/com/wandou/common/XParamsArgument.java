@@ -44,10 +44,11 @@ public class XParamsArgument implements HandlerMethodArgumentResolver {
                                   NativeWebRequest webRequest,
                                   WebDataBinderFactory binderFactory) throws Exception {
         XParam annotation = parameter.getParameterAnnotation(XParam.class);
-
+        log.info("annotation: {}", annotation);
         switch (annotation.value()) {
             case UID:
                 String token = webRequest.getHeader("token");
+                log.info("token: {}", token);
                 if (StringUtils.isBlank(token) && annotation.validate()) {
                     throw new HttpClientErrorException(HttpStatus.UNAUTHORIZED, "token不能为空");
                 }
@@ -83,9 +84,8 @@ public class XParamsArgument implements HandlerMethodArgumentResolver {
                     return annotation.defaultValue();
                 }
                 return IP;
-
+            default:
+                throw new HttpClientErrorException(HttpStatus.UNAUTHORIZED, "暂不支持的xParam类型");
         }
-
-        return null;
     }
 }

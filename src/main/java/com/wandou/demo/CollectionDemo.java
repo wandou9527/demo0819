@@ -107,16 +107,18 @@ public class CollectionDemo {
      */
     @Test
     public void m5ListThreadUnsafe() throws InterruptedException {
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 100; i++) {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    for (int i = 0; i < 10; i++) {
+                    for (int i = 0; i < 1000; i++) {
                         long currentTimeMillis = System.currentTimeMillis();
                         try {
                             threadUnsafeList.add(currentTimeMillis);
                         } catch (Exception e) {
                             System.out.print("f");
+                            //java.lang.ArrayIndexOutOfBoundsException
+                            //因为两个线程来，都判断了size不需扩容，当仅离扩容阈值差1的时候，一个线程add后完成，另一线程add就会数组越界
                             System.err.println("异常了 " + currentTimeMillis);
                             e.printStackTrace();
                         }
@@ -187,9 +189,24 @@ public class CollectionDemo {
         Object poll1 = linkedBlockingQueue.poll();
         System.out.println("poll1 取出 " + poll1);
         // take取出方法会阻塞
-        Object take = linkedBlockingQueue.take();
-        System.out.println("take 取出 " + take);
+//        Object take = linkedBlockingQueue.take();
+//        System.out.println("take 取出 " + take);
         System.out.println("队列 " + linkedBlockingQueue);
+        System.out.println("-----------------------");
+
+        //----------- 优先级队列 -----------------
+
+        PriorityQueue<Object> priorityQueue = new PriorityQueue<>();
+        priorityQueue.add(44);
+        priorityQueue.add(20);
+        priorityQueue.add(45);
+        priorityQueue.add(46);
+        Object peek1 = priorityQueue.peek();
+        System.out.println("peek1 = " + peek1);
+        System.out.println("priorityQueue = " + priorityQueue);
+        Object poll2 = priorityQueue.poll();
+        System.out.println("poll2 = " + poll2);
+        System.out.println("priorityQueue = " + priorityQueue);
     }
 
     @Test
