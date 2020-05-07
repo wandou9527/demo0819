@@ -69,27 +69,6 @@ public class MapDemo {
 
     }
 
-    public ArrayList<String> print() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
-        ArrayList<String> list = new ArrayList();
-        HashMap state = new HashMap();
-        int index_10_count = 0;
-
-        int tableSize = 16;
-        for (int i = 0; i < 1000; i++) {
-            String key = "a" + i;
-
-            //hash值 jdk的计算方式
-            Method hashMethod = HashMap.class.getDeclaredMethod("hash", Object.class);
-            int hash = (int) hashMethod.invoke(map, key);
-            int index = ((tableSize - 1) & hash);
-            if (index <= 15) {
-                list.add(key);
-            }
-        }
-
-        return list;
-    }
-
     /**
      * 试验hashMap冲突的情况
      */
@@ -98,33 +77,12 @@ public class MapDemo {
         Field tableField = HashMap.class.getDeclaredField("table");
         tableField.setAccessible(true);
 
-//        ArrayList<String> keys = print();
-
-        ArrayList<String> keys = new ArrayList();
+        List<String> keys = getSameIndexKeys(15);
         List<Integer> hashs = new ArrayList<>();
-
-        int tableSize = 16;
-        for (int i = 0; i < 1000; i++) {
-            String key = "a" + i;
-
-            //hash值 jdk的计算方式
-            Method hashMethod = HashMap.class.getDeclaredMethod("hash", Object.class);
-            hashMethod.setAccessible(true);
-            int hash = (int) hashMethod.invoke(map, key);
-            int index = ((tableSize - 1) & hash);
-            if (index == 15) {
-                System.out.println("keyHash: " + hash);
-                keys.add(key);
-                hashs.add(hash);
-            }
-        }
-
-
         for (String key : keys) {
-            map.put(key, "1");
+            map.put(key, "value");
             //打印当前table的长度，看看是否扩容了
             System.out.println("map.size: " + map.size() + ", table长度: " + ((Object[]) tableField.get(map)).length);
-//            System.out.println("map.table: " + ((Object[]) tableField.get(map)));
             if (map.size() == 8) {
                 break;
             }
@@ -139,9 +97,56 @@ public class MapDemo {
 
         Set<Map.Entry> entrySet = map.entrySet();
         for (Map.Entry entry : entrySet) {
-            System.out.println(entry);
+            System.out.println("entry: " + entry);
         }
+    }
 
+    /**
+     * 为blog写的
+     *
+     * @param idx
+     * @return
+     * @throws NoSuchMethodException
+     * @throws InvocationTargetException
+     * @throws IllegalAccessException
+     */
+    public List<String> getSameIndexKeys(int idx) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        List<String> list = new ArrayList();
+        HashMap hashMap = new HashMap();
+        int tableSize = 16;
+        for (int i = 0; i < 1000; i++) {
+            String key = "a" + i;
+            //hash值 jdk的计算方式
+            Method hashMethod = HashMap.class.getDeclaredMethod("hash", Object.class);
+            hashMethod.setAccessible(true);
+            int hash = (int) hashMethod.invoke(hashMap, key);
+            int index = ((tableSize - 1) & hash);
+            if (index == idx) {
+                list.add(key);
+            }
+        }
+        return list;
+    }
+
+    /**
+     * 为blog写的
+     *
+     * @throws NoSuchFieldException
+     * @throws NoSuchMethodException
+     * @throws IllegalAccessException
+     * @throws InvocationTargetException
+     */
+    @Test
+    public void testReSize() throws NoSuchFieldException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+        List<String> keys = getSameIndexKeys(3);
+        Field tableField = HashMap.class.getDeclaredField("table");
+        tableField.setAccessible(true);
+        HashMap<String, String> hashMap = new HashMap();
+        for (String key : keys) {
+            hashMap.put(key, "value");
+            //打印当前table的长度，看看是否扩容了
+            System.out.println("map.size: " + hashMap.size() + ", table长度: " + ((Object[]) tableField.get(hashMap)).length);
+        }
     }
 
 }

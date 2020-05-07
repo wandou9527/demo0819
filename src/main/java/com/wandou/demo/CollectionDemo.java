@@ -9,8 +9,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 
 import java.util.*;
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -252,7 +251,32 @@ public class CollectionDemo {
         List<MemberPrivilegeDTO> resultList1 = Stream.concat(tmpStream, tmpStream1).collect(Collectors.toList());
         System.out.println("resultList1 = " + JSON.toJSONString(resultList1, true));
 
+    }
 
+    /**
+     * DelayQueue
+     */
+    @Test
+    public void m9DelayQueue() {
+        DelayQueue delayQueue = new DelayQueue<>();
+        Delayed delayed = new Delayed() {
+            @Override
+            public long getDelay(TimeUnit unit) {
+                return 0;
+            }
+
+            @Override
+            public int compareTo(Delayed o) {
+                return 0;
+            }
+        };
+
+        boolean add = delayQueue.add(delayed);
+
+        System.out.println("add = " + add);
+        System.out.println("delayQueue = " + delayQueue);
+        Delayed poll = delayQueue.poll();
+        System.out.println("poll = " + poll);
     }
 
 }
