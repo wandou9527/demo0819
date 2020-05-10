@@ -32,10 +32,10 @@ import java.util.concurrent.locks.LockSupport;
 public class Demo {
 
 
-    public static void main(String[] args) {
-        boolean b = ifStr("22");
-        System.out.println(b);
-    }
+//    public static void main(String[] args) {
+//        boolean b = ifStr("22");
+//        System.out.println(b);
+//    }
 
     public static boolean ifStr(String str) {
         return StringUtils.isNotBlank(str);
@@ -255,6 +255,38 @@ public class Demo {
             System.out.println("蓝牙 Mac" + i);
 
         }
+    }
+
+    @Test
+    public void m9() throws InterruptedException {
+        int x = 4;
+        System.out.println("v is: " + ((x > 4) ? 99.9 : 9));
+
+        Object o = new Object();
+        o.wait();
+
+        float f = 1.1f;
+
+        Object oa = new float[30];
+
+    }
+
+    public static void main(String[] args) {
+        Thread t = new Thread(){
+            @Override
+            public void run() {
+                pong();
+            }
+        };
+        //实际是主线程调了run方法
+        t.run();
+        //新建的线程执行run方法
+        t.start();
+        System.out.println("ping");
+    }
+
+    static void pong() {
+        System.out.println("pong, Thread: " + Thread.currentThread().getName());
     }
 
 }
