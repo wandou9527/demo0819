@@ -1,6 +1,7 @@
 package com.wandou.demo;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.wandou.enums.AEnum;
 import com.wandou.enums.AlipayTradeStatusEnum;
 import com.wandou.model.BankOrderDTO;
@@ -287,6 +288,13 @@ public class Demo {
 
     static void pong() {
         System.out.println("pong, Thread: " + Thread.currentThread().getName());
+    }
+
+    @Test
+    public void m5() {
+        String str = "abcccc343444";
+        JSONObject jsonObject = JSON.parseObject(str);
+        System.out.println("jsonObject = " + jsonObject);
     }
 
 }

@@ -279,4 +279,25 @@ public class CollectionDemo {
         System.out.println("poll = " + poll);
     }
 
+    @Test
+    public void m10Stack() {
+        Stack<String> stack = new Stack();
+        stack.push("aaa");
+        stack.push("bbb");
+        System.out.println("stack = " + stack);
+
+        int search = stack.search("a");
+        System.out.println("search = " + search);
+        int search1 = stack.search("aaa");
+        System.out.println("search1 = " + search1);
+
+        String peek = stack.peek();
+        System.out.println("peek = " + peek);
+        System.out.println("stack = " + stack);
+
+        String pop = stack.pop();
+        System.out.println("pop = " + pop);
+        System.out.println("stack = " + stack);
+    }
+
 }

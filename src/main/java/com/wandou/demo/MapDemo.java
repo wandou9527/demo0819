@@ -43,8 +43,12 @@ public class MapDemo {
 
     @Test
     public void hashMapTest() {
-        HashMap map = new HashMap(3);
+        HashMap<String, Object> map = new HashMap(3);
         map.put("k-lala", "v-zzz");
+        map.put("k-lala2", "v-zzz2");
+        map.forEach((k, v) -> {
+            System.out.println(k + ", " + v);
+        });
     }
 
     /**
