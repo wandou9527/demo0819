@@ -16,6 +16,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author liming
@@ -128,5 +129,12 @@ public class DateTimeDemo {
         calendar.setTime(new Date());
         calendar.set(Calendar.DAY_OF_MONTH, -10);//让日期加1
         System.out.println(dateFormat.format(calendar.getTime()));
+    }
+
+    @Test
+    public void m4() {
+        TimeUnit millUnit = TimeUnit.MILLISECONDS;
+        long convert = millUnit.convert(1, TimeUnit.SECONDS);
+        System.out.println("convert = " + convert);
     }
 }
