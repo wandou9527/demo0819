@@ -134,4 +134,17 @@ public class StrDemo {
         }
         System.out.println("new String(arr) = " + new String(arr));
     }
+
+    /**
+     * 数组转成以特定符号间隔的字符串
+     */
+    @Test
+    public void m7() {
+        String [] arr = new String[] {"aaa", "VALUE", "abc333"};
+        String s = org.springframework.util.StringUtils.arrayToCommaDelimitedString(arr);
+        System.out.println("s = " + s);
+
+        String s1 = org.springframework.util.StringUtils.arrayToDelimitedString(arr, ":");
+        System.out.println("s1 = " + s1);
+    }
 }
