@@ -2,12 +2,17 @@ package com.wandou.demo;
 
 import com.alibaba.fastjson.JSON;
 import com.wandou.demo.thread.ThreadDemo;
+import com.wandou.model.Book;
+import com.wandou.model.Movie;
 import com.wandou.model.dto.MemberPrivilegeDTO;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.time.DateUtils;
 import org.junit.Test;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.concurrent.*;
 import java.util.stream.Collectors;
@@ -195,7 +200,7 @@ public class CollectionDemo {
 
         //----------- 优先级队列 -----------------
 
-        PriorityQueue<Object> priorityQueue = new PriorityQueue<>();
+        PriorityQueue<Object> priorityQueue = new PriorityQueue<>(10, Comparator.comparing(Object::hashCode));
         priorityQueue.add(44);
         priorityQueue.add(20);
         priorityQueue.add(45);
@@ -205,6 +210,10 @@ public class CollectionDemo {
         System.out.println("priorityQueue = " + priorityQueue);
         Object poll2 = priorityQueue.poll();
         System.out.println("poll2 = " + poll2);
+        System.out.println("priorityQueue = " + priorityQueue);
+        Book book = new Book();
+        // 如不加 Comparator 报 java.lang.ClassCastException: com.wandou.model.Book cannot be cast to java.lang.Comparable
+        priorityQueue.add(book);
         System.out.println("priorityQueue = " + priorityQueue);
     }
 
@@ -255,18 +264,20 @@ public class CollectionDemo {
 
     /**
      * DelayQueue
+     * 延迟队列
      */
     @Test
     public void m9DelayQueue() {
-        DelayQueue delayQueue = new DelayQueue<>();
+        DelayQueue<Delayed> delayQueue = new DelayQueue<>();
         Delayed delayed = new Delayed() {
             @Override
             public long getDelay(TimeUnit unit) {
-                return 0;
+                // 代表延时的纳秒数
+                return 5000000000L;
             }
 
             @Override
-            public int compareTo(Delayed o) {
+            public int compareTo(Delayed delayed) {
                 return 0;
             }
         };
@@ -277,6 +288,47 @@ public class CollectionDemo {
         System.out.println("delayQueue = " + delayQueue);
         Delayed poll = delayQueue.poll();
         System.out.println("poll = " + poll);
+    }
+
+
+    /**
+     * 延时队列
+     *
+     * @throws InterruptedException
+     */
+    @Test
+    public void m11DelayQueue2() throws InterruptedException {
+        DelayQueue<Movie> delayQueue = new DelayQueue<>();
+
+        Movie movie = new Movie("乘风破浪", 170L, DateUtils.MILLIS_PER_SECOND);
+        Movie movie1 = new Movie("非凡任务", 230L, DateUtils.MILLIS_PER_SECOND * 8);
+        Movie movie2 = new Movie("霸王别姬", 450L, DateUtils.MILLIS_PER_SECOND * 3);
+        Movie movie3 = new Movie("大赢家", 430L, DateUtils.MILLIS_PER_SECOND);
+        Movie movie4 = new Movie("缝纫机乐队", 550L, DateUtils.MILLIS_PER_SECOND * 2);
+
+        boolean add = delayQueue.add(movie);
+        System.out.println("add = " + add);
+//        MessageDTO take = delayQueue.take();
+//        System.out.println("take = " + take);
+
+        delayQueue.add(movie1);
+        System.out.println("delayQueue = " + delayQueue);
+
+        delayQueue.add(movie2);
+        System.out.println("delayQueue = " + delayQueue);
+
+        boolean add1 = delayQueue.add(movie3);
+        System.out.println("delayQueue = " + delayQueue);
+
+        boolean add4 = delayQueue.add(movie4);
+        System.out.println("delayQueue = " + delayQueue);
+
+        while (true) {
+            System.out.println("---- 开始取任务 -----");
+            Movie take = delayQueue.poll();
+            System.out.println(LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_TIME) + " 取到任务take = " + take);
+        }
+
     }
 
     @Test

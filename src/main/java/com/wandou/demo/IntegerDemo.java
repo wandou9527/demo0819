@@ -41,12 +41,15 @@ public class IntegerDemo {
      */
     @Test
     public void weiYunSuan() {
+        // 位运算移位的方向即为箭头所指方向
         int a = 2 << 1;
         System.out.println(a);
 
         //Integer.highestOneBit是用来获取最左边的bit（其他bit位为0）所代表的数值.
-        int i = Integer.highestOneBit(10);
-        System.out.println(i);
+        System.out.println("Integer.highestOneBit(10) = " + Integer.highestOneBit(10));
+        System.out.println("Integer.highestOneBit(1) = " + Integer.highestOneBit(1));
+        System.out.println("Integer.highestOneBit(2) = " + Integer.highestOneBit(2));
+        System.out.println("Integer.highestOneBit(3) = " + Integer.highestOneBit(3));
 
         System.out.println(Integer.max(9, 4));
         System.out.println(Integer.MIN_VALUE);
@@ -59,8 +62,18 @@ public class IntegerDemo {
         System.out.println("15 << 1: " + b);
         System.out.println("15 >> 1: " + (15 >> 1));
 
+        /*
+         *           2^2  2^1  2^0
+         * 3的二进制        1    1
+         * 左移1位      1   1    0    => 6
+         *
+         */
         System.out.println("3 << 1: " + (3 << 1));
         System.out.println("3 >> 1: " + (3 >> 1));
+
+        System.out.println("-1 << 19: " + (-1 << 19));
+        System.out.println("0 << 19: " + (0 << 19));
+        System.out.println("1 << 19: " + (1 << 19));
     }
 
     @Test
@@ -149,7 +162,12 @@ public class IntegerDemo {
     @Test
     public void isPower1() {
         // 1 是 2 的 0 次方
-        int n = 128;
+        int n = 8;
+        /*
+         * 8的二进制  1  0  0  0
+         * 7的二进制  0  1  1  1  空位补0
+         * 相与结果为0
+         */
         int target = n & (n - 1);
         System.out.println(target == 0);
 
