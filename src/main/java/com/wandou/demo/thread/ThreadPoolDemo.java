@@ -15,9 +15,9 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 public class ThreadPoolDemo {
 
-    private static AtomicInteger atomicInteger = new AtomicInteger(0);
-    private static BlockingQueue<Runnable> blockingQueue = new LinkedBlockingDeque(200);
-    private static ThreadPoolExecutor threadPool = new ThreadPoolExecutor(5,
+    private AtomicInteger atomicInteger = new AtomicInteger(0);
+    private BlockingQueue<Runnable> blockingQueue = new LinkedBlockingDeque(200);
+    private ThreadPoolExecutor threadPool = new ThreadPoolExecutor(5,
             10,
             DateUtils.MILLIS_PER_DAY,
             TimeUnit.MILLISECONDS,

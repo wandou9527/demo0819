@@ -180,12 +180,16 @@ public class CollectionDemo {
         LinkedBlockingQueue linkedBlockingQueue = new LinkedBlockingQueue(2);
         linkedBlockingQueue.offer(1);
         linkedBlockingQueue.offer(2);
+        // 达到队列容量，添加返回false
         boolean offer = linkedBlockingQueue.offer(3);
         System.out.println("offer 添加返回 Boolean " + offer);
         System.out.println("队列 " + linkedBlockingQueue);
-//        linkedBlockingQueue.add(4);
+        // linkedBlockingQueue.add(4);
         Object poll = linkedBlockingQueue.poll();
         System.out.println("poll 取出 " + poll);
+
+        boolean offer1 = linkedBlockingQueue.offer(3);
+        System.out.println("offer1 返回 Boolean " + offer1);
 
         Object peek = linkedBlockingQueue.peek();
         System.out.println("peek 取出 " + peek);
@@ -195,6 +199,10 @@ public class CollectionDemo {
         // take取出方法会阻塞
 //        Object take = linkedBlockingQueue.take();
 //        System.out.println("take 取出 " + take);
+        System.out.println("队列 " + linkedBlockingQueue);
+        boolean offer2 = linkedBlockingQueue.offer(3);
+        // LinkedBlockingQueue 允许有重复元素
+        System.out.println("添加重复元素返回 offer2 = " + offer2);
         System.out.println("队列 " + linkedBlockingQueue);
         System.out.println("-----------------------");
 
@@ -211,7 +219,7 @@ public class CollectionDemo {
         Object poll2 = priorityQueue.poll();
         System.out.println("poll2 = " + poll2);
         System.out.println("priorityQueue = " + priorityQueue);
-        Book book = new Book();
+        Book book = new Book("水浒传", 2000L);
         // 如不加 Comparator 报 java.lang.ClassCastException: com.wandou.model.Book cannot be cast to java.lang.Comparable
         priorityQueue.add(book);
         System.out.println("priorityQueue = " + priorityQueue);
@@ -331,6 +339,9 @@ public class CollectionDemo {
 
     }
 
+    /**
+     * 栈
+     */
     @Test
     public void m10Stack() {
         Stack<String> stack = new Stack();

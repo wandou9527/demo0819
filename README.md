@@ -9,6 +9,4 @@
 - javaweb 实验
 - 自研 boot-starter 成功
 
-liming0819    
-2018年8月19日 在老dell电脑上 idea 配置 git    
 
