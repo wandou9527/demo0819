@@ -15,7 +15,7 @@ public class MyThreadPoolDemo {
     private MyThreadPoolV2 myThreadPoolV2 = new MyThreadPoolV2(3, 200);
 
     @Test
-    public void t1 () throws InterruptedException {
+    public void t1() throws InterruptedException {
         AtomicInteger atomicInteger = new AtomicInteger(0);
         Runnable runnable = new Runnable() {
             @Override

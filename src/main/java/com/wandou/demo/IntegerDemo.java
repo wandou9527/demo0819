@@ -226,6 +226,7 @@ public class IntegerDemo {
         System.out.println("10 * 0.1 = " + 10 * 0.1);
         System.out.println("0.9 + 0.1 = " + (0.9 + 0.1));
         System.out.println("0.99 + 0.01 = " + (0.99 + 0.01));
+        System.out.println("0.999 + 0.001 = " + (0.99 + 0.01));
 
     }
 }
