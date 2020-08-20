@@ -6,6 +6,7 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.Stack;
 
 /**
  * @author liming
@@ -17,10 +18,17 @@ public class CommonAlgorithmDemo {
     @Test
     public void bigintegerAddTest() {
         System.out.println("Long.MAX_VALUE = " + Long.MAX_VALUE);
-        bigNumAdd("111", "2010");
-        bigNumAdd_2("111", "2010");
+        bigNumAdd("112", "2019");
+        bigNumAdd_2("112", "2019");
+        bigNumAdd_3("112", "2019");
         bigNumAdd(Long.MAX_VALUE + "", Long.MAX_VALUE + "");
         bigNumAdd_2(Long.MAX_VALUE + "", Long.MAX_VALUE + "");
+        bigNumAdd_3(Long.MAX_VALUE + "", Long.MAX_VALUE + "");
+        bigNumAdd_3(Long.MAX_VALUE + "", "10");
+        // ------------- v2 ------------------------
+        System.out.println("------------- v2 ------------------------");
+//        bigNumAddV2("1111", "2010");
+//        bigNumAddV2(Long.MAX_VALUE + "", Long.MAX_VALUE + "");
 
     }
 
@@ -108,19 +116,69 @@ public class CommonAlgorithmDemo {
         System.out.println(targetSb.reverse().toString());
     }
 
+    public void bigNumAdd_3(String strNum1, String strNum2) {
+        int len1 = strNum1.length();
+        int len2 = strNum2.length();
+        int maxLen = Integer.max(len1, len2);
+        StringBuilder targetSb = new StringBuilder();
+        //进位
+        int carry = 0;
+        for (int i = 0; i < maxLen; i++) {
+            int temp = carry;
+            carry = 0;
+            if (i < len1) {
+                temp += Integer.parseInt(strNum1.charAt(len1 - 1 -i) + "");
+            }
+            if (i < len2) {
+                temp += Integer.parseInt(strNum2.charAt(len2 - 1- i) + "");
+            }
+            if (temp >= 10) {
+                temp = temp - 10;
+                carry = 1;
+            }
+            targetSb.append(temp);
+        }
+        System.out.println(targetSb.reverse().toString());
+    }
+
+    /**
+     * 2020-8-19
+     * 栈 简化代码减少if
+     *
+     * @param num1
+     * @param num2
+     */
     public void bigNumAddV2(String num1, String num2) {
         int minLen = Integer.min(num1.length(), num2.length());
+        int maxLen = Integer.max(num1.length(), num2.length());
         char[] chars1 = num1.toCharArray();
         char[] chars2 = num2.toCharArray();
+        StringBuilder targetSb = new StringBuilder();
+        Stack<Integer> stack1 = new Stack();
+        Stack<Integer> stack2 = new Stack();
+        for (int i = 0; i < maxLen; i++) {
+            if (i < num1.length()) {
+                stack1.push(Integer.parseInt(num1.charAt(i) + ""));
+            }
+            if (i < num2.length()) {
+                stack2.push(Integer.parseInt(num2.charAt(i) + ""));
+            }
+        }
+
         //进位
         int carry = 0;
         //倒着遍历，从个位开始计算
-        for (int i = minLen - 1; i >= 0 ; i++) {
-            int realNum1 = chars1[i];
-            int realNum2 = chars2[i];
-            int temp = realNum1 + realNum2 + carry;
+        for (int i = 0; i < maxLen; i++) {
+            Integer bit1 = stack1.pop();
+            Integer bit2 = stack2.pop();
+            int temp = (bit1 == null ? 0 : bit1) + (bit2 == null ? 0 : bit2) + carry;
+            if (temp >= 10) {
+                temp = temp - 10;
+                carry = 1;
+            }
+            targetSb.append(temp);
         }
-
+        System.out.println(targetSb.toString());
     }
 
     @Test

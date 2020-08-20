@@ -1,4 +1,4 @@
-package com.wandou.demo.algorithm.post;
+package com.wandou.demo.algorithm.post.bignumadd.p1;
 
 import org.junit.Test;
 
