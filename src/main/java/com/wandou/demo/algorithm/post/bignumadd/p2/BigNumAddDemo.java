@@ -38,6 +38,9 @@ public class BigNumAddDemo {
             }
             targetSb.append(temp);
         }
+        if (carry > 0) {
+            targetSb.append(carry);
+        }
         System.out.println(targetSb.reverse().toString());
     }
 }

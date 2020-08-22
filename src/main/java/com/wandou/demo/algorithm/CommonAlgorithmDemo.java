@@ -71,6 +71,9 @@ public class CommonAlgorithmDemo {
                 list.add(temp);
             }
         }
+        if (carry > 0) {
+            list.add(carry);
+        }
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < list.size(); i++) {
             sb.append(list.get(list.size() - 1 - i));
@@ -113,6 +116,9 @@ public class CommonAlgorithmDemo {
                 targetSb.append(temp);
             }
         }
+        if (carry > 0) {
+            targetSb.append(carry);
+        }
         System.out.println(targetSb.reverse().toString());
     }
 
@@ -137,6 +143,9 @@ public class CommonAlgorithmDemo {
                 carry = 1;
             }
             targetSb.append(temp);
+        }
+        if (carry > 0) {
+            targetSb.append(carry);
         }
         System.out.println(targetSb.reverse().toString());
     }
