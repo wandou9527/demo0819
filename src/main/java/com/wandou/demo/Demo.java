@@ -297,4 +297,12 @@ public class Demo {
         System.out.println("jsonObject = " + jsonObject);
     }
 
+    @Test
+    public void m6() {
+        float [][] f1 = { {1.0f },{4.0f, 1.2f}};
+        Object oo = f1;
+        f1[1] = oo;
+
+    }
+
 }

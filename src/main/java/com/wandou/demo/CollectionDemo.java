@@ -139,6 +139,36 @@ public class CollectionDemo {
     }
 
     @Test
+    public void m5ListThreadUnsafeV2() throws InterruptedException {
+        List<String> list = new ArrayList<>();
+        Thread t1 = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                for (int i = 0; i < 100; i++) {
+                    list.add("t1-" + i);
+                }
+            }
+        }, "Thread-1");
+        Thread t2 = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                for (int i = 0; i < 100; i++) {
+                    list.add("t2-" + i);
+                }
+            }
+        }, "Thread-2");
+        t1.start();
+        t2.start();
+
+        Thread.sleep(2000);
+        int size = list.size();
+        System.out.println("size = " + size);
+        for (int i = 0; i < size; i++) {
+            System.out.println("索引为" + i + "的元素为：" + list.get(i));
+        }
+    }
+
+    @Test
     public void m6UseTool() throws InterruptedException {
         CountDownLatch countDownLatch = new CountDownLatch(10);
         Runnable runnable = new Runnable() {
