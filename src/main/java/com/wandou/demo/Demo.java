@@ -233,7 +233,7 @@ public class Demo {
     }
 
     @Test
-    public void m4() {
+    public void m13() {
         for (int i = 0; i < 10; i++) {
             System.out.println(i);
         }
@@ -259,7 +259,7 @@ public class Demo {
     }
 
     @Test
-    public void m9() throws InterruptedException {
+    public void m14() throws InterruptedException {
         int x = 4;
         System.out.println("v is: " + ((x > 4) ? 99.9 : 9));
 
@@ -291,18 +291,29 @@ public class Demo {
     }
 
     @Test
-    public void m5() {
+    public void m15() {
         String str = "abcccc343444";
         JSONObject jsonObject = JSON.parseObject(str);
         System.out.println("jsonObject = " + jsonObject);
     }
 
     @Test
-    public void m6() {
+    public void m16() {
         float [][] f1 = { {1.0f },{4.0f, 1.2f}};
         Object oo = f1;
-        f1[1] = oo;
+//        f1[1] = oo;
 
+    }
+
+    /**
+     * time
+     */
+    @Test
+    public void m17() {
+        for (int i = 0; i < 10; i++) {
+            long nanoTime = System.nanoTime();
+            System.out.println("nanoTime = " + nanoTime);
+        }
     }
 
 }
