@@ -153,4 +153,10 @@ public class MapDemo {
         }
     }
 
+    @Test
+    public void m6LinkedHashMap() {
+        LinkedHashMap<String, String> linkedHashMap = new LinkedHashMap<>();
+        linkedHashMap.put("a", "av");
+    }
+
 }

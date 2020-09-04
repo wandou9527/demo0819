@@ -40,13 +40,13 @@ public class IODemo {
         String name = file.getName();
         System.out.println("name = " + name);
         FileWriter fileWriter = new FileWriter(file, true);
-        fileWriter.write("啦啦啦啦😝😋");
-        fileWriter.write(chars);
+        fileWriter.write("啦啦啦啦😝😋\r\n");
+        fileWriter.write(chars + "\r\n");
         fileWriter.flush();
 
         BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
 //        bufferedWriter.newLine();
-        bufferedWriter.write("【bufferedWriter写的内容】");
+        bufferedWriter.write("【bufferedWriter写的内容】\r\n");
         bufferedWriter.flush();
 
         bufferedWriter.close();

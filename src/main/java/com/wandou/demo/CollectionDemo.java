@@ -246,7 +246,10 @@ public class CollectionDemo {
         Object peek1 = priorityQueue.peek();
         System.out.println("peek1 = " + peek1);
         System.out.println("priorityQueue = " + priorityQueue);
-        Object poll2 = priorityQueue.poll();
+        Object poll2;
+        while ((poll2 = priorityQueue.poll()) != null) {
+            System.out.println("poll2 = " + poll2);
+        }
         System.out.println("poll2 = " + poll2);
         System.out.println("priorityQueue = " + priorityQueue);
         Book book = new Book("水浒传", 2000L);
