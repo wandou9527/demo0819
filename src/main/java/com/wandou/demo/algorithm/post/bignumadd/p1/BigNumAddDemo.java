@@ -13,6 +13,7 @@ public class BigNumAddDemo {
     public void bigintegerAddTest() {
         System.out.println("Long.MAX_VALUE = " + Long.MAX_VALUE);
         bigNumAdd("111", "2010");
+        bigNumAdd("1112", "2010999");
         bigNumAdd(Long.MAX_VALUE + "", Long.MAX_VALUE + "");
         bigNumAdd(Long.MAX_VALUE + "", "10");
     }
