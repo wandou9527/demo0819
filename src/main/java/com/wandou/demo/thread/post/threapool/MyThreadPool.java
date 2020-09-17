@@ -141,11 +141,9 @@ public class MyThreadPool implements Executor {
     }
 
     final void runWorker(Worker worker) {
-        System.out.println("runWorker");
         Runnable task = worker.firstTask;
         worker.firstTask = null;
         while (task != null || (task = getTask()) != null) {
-            System.out.println("runWorker while");
             try {
                 task.run();
             } catch (Exception e) {
@@ -158,12 +156,11 @@ public class MyThreadPool implements Executor {
     }
 
     private Runnable getTask() {
-        System.out.println("getTask workQueue.size() = " + workQueue.size());
         for (; ; ) {
             try {
                 return workQueue.take();
             } catch (InterruptedException e) {
-                System.out.println("InterruptedException");
+                System.out.println("InterruptedException!!!");
             }
         }
     }
