@@ -224,6 +224,8 @@ public class Demo {
 
             LockSupport.park();
 
+            System.out.println("hello");
+
             LockSupport.park(); //到此处阻塞 wait
 
             System.out.println("hello");
@@ -273,7 +275,7 @@ public class Demo {
     }
 
     public static void main(String[] args) {
-        Thread t = new Thread(){
+        Thread t = new Thread() {
             @Override
             public void run() {
                 pong();
@@ -299,7 +301,7 @@ public class Demo {
 
     @Test
     public void m16() {
-        float [][] f1 = { {1.0f },{4.0f, 1.2f}};
+        float[][] f1 = {{1.0f}, {4.0f, 1.2f}};
         Object oo = f1;
 //        f1[1] = oo;
 
@@ -314,6 +316,22 @@ public class Demo {
             long nanoTime = System.nanoTime();
             System.out.println("nanoTime = " + nanoTime);
         }
+    }
+
+    /**
+     * 连续Boolean逻辑判断
+     */
+    @Test
+    public void m18Bool() {
+        System.out.println(false && false && false);
+        System.out.println(greaterThanOne(0)
+                && greaterThanOne(-1)
+                && greaterThanOne(-2));
+    }
+
+    private boolean greaterThanOne(int i) {
+        System.out.println("greaterThanOne: " + i);
+        return i > 1;
     }
 
 }
