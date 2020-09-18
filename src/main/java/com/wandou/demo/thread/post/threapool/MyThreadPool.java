@@ -60,7 +60,6 @@ public class MyThreadPool implements Executor {
             }
         }
         if (workQueue.offer(command)) {
-            System.out.println("workQueue.size() = " + workQueue.size());
             int recheck = workerCount.get();
             if (recheck == 0) {
                 addWorker(null, false);

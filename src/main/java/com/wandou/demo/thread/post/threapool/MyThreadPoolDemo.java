@@ -14,8 +14,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class MyThreadPoolDemo {
 
     private BlockingQueue<Runnable> workQueue = new LinkedBlockingQueue<>();
-    private MyThreadPool myThreadPool = new MyThreadPool(2, workQueue);
-
+    private MyThreadPool myThreadPool = new MyThreadPool(3, workQueue);
 
     @Test
     public void t1() throws Exception {
@@ -37,7 +36,7 @@ public class MyThreadPoolDemo {
             myThreadPool.execute(task);
         }
         Thread.sleep(5000);
-        System.out.println("-----------------------------");
+        System.out.println("================================================");
         for (int i = 0; i < 30; i++) {
             myThreadPool.execute(task);
         }
