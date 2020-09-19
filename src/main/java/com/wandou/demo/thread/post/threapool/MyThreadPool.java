@@ -59,6 +59,7 @@ public class MyThreadPool implements Executor {
                 return;
             }
         }
+        // 添加线程不成功，尝试放入任务队列
         if (workQueue.offer(command)) {
             int recheck = workerCount.get();
             if (recheck == 0) {
@@ -157,9 +158,10 @@ public class MyThreadPool implements Executor {
     private Runnable getTask() {
         for (; ; ) {
             try {
+                // 阻塞从任务队列拿任务
                 return workQueue.take();
             } catch (InterruptedException e) {
-                System.out.println("InterruptedException!!!");
+                System.out.println("getTask InterruptedException!!!");
             }
         }
     }

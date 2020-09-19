@@ -373,6 +373,24 @@ public class CollectionDemo {
     }
 
     /**
+     * linkedQueue有上限吗? 有
+     */
+    @Test
+    public void m11LinkedQueueLimit() throws InterruptedException {
+        LinkedBlockingQueue<String> linkedBlockingQueue = new LinkedBlockingQueue<>(10);
+        for (char c = 'a'; c < 'z'; c++) {
+            boolean offer = linkedBlockingQueue.offer(c + "");
+            System.out.println("添加返回：" + c + " " + offer);
+        }
+        System.out.println("linkedBlockingQueue = " + linkedBlockingQueue);
+        BlockingQueue<Integer> blockingQueue = new LinkedBlockingQueue<>(10);
+        for (int i = 0; i < 100; i++) {
+            blockingQueue.put(i);
+            System.out.println(i + " 成功");
+        }
+    }
+
+    /**
      * 栈
      */
     @Test
