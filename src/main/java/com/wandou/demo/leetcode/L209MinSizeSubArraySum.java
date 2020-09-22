@@ -14,7 +14,7 @@ public class L209MinSizeSubArraySum {
     public void test() {
         int s = 7;
         int[] nums = new int[]{2, 3, 1, 2, 4, 3};
-        System.out.println(minSubArrayLen(7, nums));
+        System.out.println(minSubArrayLen(s, nums));
     }
 
     public int minSubArrayLen(int s, int[] nums) {
