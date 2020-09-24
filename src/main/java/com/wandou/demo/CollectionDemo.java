@@ -256,6 +256,10 @@ public class CollectionDemo {
         // 如不加 Comparator 报 java.lang.ClassCastException: com.wandou.model.Book cannot be cast to java.lang.Comparable
         priorityQueue.add(book);
         System.out.println("priorityQueue = " + priorityQueue);
+
+        ArrayBlockingQueue<Integer> arrayBlockingQueue = new ArrayBlockingQueue<>(10);
+        arrayBlockingQueue.offer(8);
+        arrayBlockingQueue.poll();
     }
 
     @Test
