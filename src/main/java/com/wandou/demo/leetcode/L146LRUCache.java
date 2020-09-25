@@ -31,7 +31,7 @@ public class L146LRUCache {
             addToTail(key);
             return value;
         }
-        return 0;
+        return -1;
     }
 
     public void put(int key, int value) {
@@ -54,8 +54,11 @@ public class L146LRUCache {
     public void addToTail(Integer key) {
         queue.remove(key);
         queue.add(key);
-        if (queue.size() > capacity) {
-            queue.poll();
+        while (queue.size() > capacity) {
+            Integer head = queue.poll();
+            if (head != null) {
+                storage.remove(head);
+            }
         }
     }
 
@@ -66,6 +69,7 @@ public class L146LRUCache {
 //            sb.append(head).append(", ");
 //        }
         System.out.println("queue: " + queue);
+        System.out.println("storage = " + storage);
     }
 }
 

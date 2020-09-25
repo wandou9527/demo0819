@@ -14,27 +14,33 @@ public class L146LRUCacheTest {
 
     @Test
     public void test() {
-        L146LRUCache l146LRUCache = new L146LRUCache(3);
+        L146LRUCache l146LRUCache = new L146LRUCache(2);
         l146LRUCache.put(1, 1);
         l146LRUCache.put(2, 2);
-        l146LRUCache.put(3, 3);
-        l146LRUCache.printQueue();
+//        l146LRUCache.put(3, 3);
+//        l146LRUCache.printQueue();
 
         int value = l146LRUCache.get(1);
         System.out.println("value = " + value);
+//        l146LRUCache.printQueue();
+
+        l146LRUCache.put(3, 3); // 该操作会使得关键字 2 作废
         l146LRUCache.printQueue();
 
-        l146LRUCache.put(4, 4);
-        l146LRUCache.printQueue();
-
-        int value2 = l146LRUCache.get(3);
+        int value2 = l146LRUCache.get(2); // 返回 -1 (未找到)
         System.out.println("value2 = " + value2);
+//        l146LRUCache.printQueue();
+
+        l146LRUCache.put(4, 4);    // 该操作会使得关键字 1 作废
         l146LRUCache.printQueue();
 
-        int value3 = l146LRUCache.get(2);
+        int value1 = l146LRUCache.get(1);// 返回 -1 (未找到)
+        System.out.println("value1 = " + value1);
+
+        int value3 = l146LRUCache.get(3);// 返回  3
         System.out.println("value3 = " + value3);
-        l146LRUCache.printQueue();
-
+        int value4 = l146LRUCache.get(4);// 返回  4
+        System.out.println("value4 = " + value4);
     }
 
     @Test
