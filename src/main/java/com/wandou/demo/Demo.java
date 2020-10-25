@@ -334,4 +334,21 @@ public class Demo {
         return i > 1;
     }
 
+    @Test
+    public void m19SingleNumTest() {
+        System.out.println(m19SingleNum(64));
+    }
+
+    private int m19SingleNum(int num) {
+        char[] chars = (num + "").toCharArray();
+        int sum = 0;
+        for (int i = 0; i < chars.length; i++) {
+            sum += Integer.parseInt(chars[i] + "");
+        }
+        if (sum <= 9) {
+            return sum;
+        }
+        return m19SingleNum(sum);
+    }
+
 }
