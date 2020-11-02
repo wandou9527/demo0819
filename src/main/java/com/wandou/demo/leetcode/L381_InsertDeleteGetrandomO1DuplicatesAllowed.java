@@ -68,6 +68,28 @@ public class L381_InsertDeleteGetrandomO1DuplicatesAllowed {
     /**
      * Removes a value from the collection. Returns true if the collection contained the specified element.
      */
+    // 参考官方，貌似问题出在 1
+    public boolean removeV2(int val) {
+        if (!idxsMap.containsKey(val)) {
+            return false;
+        }
+        Iterator<Integer> it = idxsMap.get(val).iterator();
+        int i = it.next();
+        int lastNum = data.get(data.size() - 1);
+        data.set(i, lastNum);
+        idxsMap.get(val).remove(i);
+        idxsMap.get(lastNum).remove(data.size() - 1);
+        if (i < data.size() - 1) {
+            idxsMap.get(lastNum).add(i);
+        }
+        //[1]
+        if (idxsMap.get(val).size() == 0) {
+            idxsMap.remove(val);
+        }
+        data.remove(data.size() - 1);
+        return true;
+    }
+
     public boolean remove(int val) {
         Set<Integer> idxs = idxsMap.get(val);
         if (idxs == null || idxs.isEmpty()) {
