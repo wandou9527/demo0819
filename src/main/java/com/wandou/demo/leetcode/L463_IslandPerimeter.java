@@ -27,10 +27,10 @@ public class L463_IslandPerimeter {
         int perimeter = 0;
         for (int i = 0; i < grid.length; i++) {
             for (int j = 0; j < grid[i].length; j++) {
+                // 水 继续下次循环
                 if (grid[i][j] == 0) {
                     continue;
                 }
-                // 陆地
                 perimeter += 4;
                 int upIdx = i - 1;
                 int downIdx = i + 1;
