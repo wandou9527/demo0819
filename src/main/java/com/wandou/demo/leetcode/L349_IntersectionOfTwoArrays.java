@@ -7,7 +7,7 @@ import java.util.*;
 /**
  * @author liming
  * @date 2020/11/2
- * @description
+ * @description 349. 两个数组的交集 【简单】
  */
 public class L349_IntersectionOfTwoArrays {
 

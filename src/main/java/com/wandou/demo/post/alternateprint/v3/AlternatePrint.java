@@ -6,6 +6,7 @@ import org.junit.Test;
 import java.io.IOException;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.SynchronousQueue;
 
 /**
  * @author liming
@@ -91,5 +92,15 @@ public class AlternatePrint {
 
         System.in.read();
         Thread.sleep(20000L);
+    }
+
+    /**
+     * 同步队列方式实现
+     *
+     * @see java.util.concurrent.SynchronousQueue
+     */
+    public void alternatePrintV4() {
+        SynchronousQueue<Object> synchronousQueue = new SynchronousQueue();
+        synchronousQueue.offer(new Object());
     }
 }
