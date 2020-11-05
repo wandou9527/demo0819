@@ -25,9 +25,7 @@ public class AlternatePrint {
      * BlockingQueue 实现
      */
     @Test
-    public void alternatePrint() throws InterruptedException, IOException {
-        alphabetBlockingQueue.add(alphabets[0]);
-
+    public void alternatePrint() throws InterruptedException {
         t1 = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -46,13 +44,11 @@ public class AlternatePrint {
             @Override
             public void run() {
                 for (int i = 0; i < nums.length; i++) {
+                    alphabetBlockingQueue.add(alphabets[i]);
                     try {
                         System.out.println(numBlockingQueue.take());
                     } catch (InterruptedException e) {
                         e.printStackTrace();
-                    }
-                    if (i < alphabets.length - 1) {
-                        alphabetBlockingQueue.add(alphabets[i + 1]);
                     }
                 }
             }
@@ -61,8 +57,8 @@ public class AlternatePrint {
         t1.start();
         t2.start();
 
-        // 主线程阻塞等待子线程运行完毕
-        System.in.read();
+        // 主线程等待子线程运行完毕
+        Thread.sleep(10000);
     }
 
     @Test
@@ -99,8 +95,80 @@ public class AlternatePrint {
      *
      * @see java.util.concurrent.SynchronousQueue
      */
-    public void alternatePrintV4() {
+    @Test
+    public void alternatePrintV4() throws InterruptedException {
+        final char[] nums = "1234567".toCharArray();
+        final char[] alphabets = "ABCDEFG".toCharArray();
+        SynchronousQueue<Character> numQueue = new SynchronousQueue<>();
+        SynchronousQueue<Character> alphabetQueue = new SynchronousQueue<>();
+
+//        alphabetQueue.offer(alphabets[0]);
+//        System.out.println("alphabetQueue = " + alphabetQueue);
+
+        //打印字母
+        Thread t1 = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                for (int i = 0; i < nums.length; i++) {
+                    try {
+                        System.out.println(alphabetQueue.take());
+                        numQueue.put(nums[i]);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+            }
+        });
+
+        //打印数字
+        Thread t2 = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                for (int i = 0; i < alphabets.length; i++) {
+                    try {
+                        alphabetQueue.put(alphabets[i]);
+                        System.out.println(numQueue.take());
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+
+        t1.start();
+        t2.start();
+
+        Thread.sleep(10000);
+    }
+
+    @Test
+    public void test1() throws InterruptedException {
+        // 取数据时，需其他线程插入的数据，否则等待
         SynchronousQueue<Object> synchronousQueue = new SynchronousQueue();
-        synchronousQueue.offer(new Object());
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                for (int i = 0; i < 10; i++) {
+                    System.out.println("add " + i);
+                    try {
+                        synchronousQueue.put("abc" + i);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    System.out.println("synchronousQueue = " + synchronousQueue);
+
+                }
+            }
+        }).start();
+
+        int j = 0;
+        while (true) {
+            System.out.println("while - " + j++);
+            Object obj = synchronousQueue.take();
+            System.out.println("obj = " + obj);
+        }
+
     }
 }
