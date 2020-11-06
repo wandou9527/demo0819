@@ -12,7 +12,7 @@ import java.nio.charset.StandardCharsets;
  */
 public class IODemo {
 
-    private static File file = new File("/Users/liming/Documents/java/java_self/git_site_self/demo0819/src/main/resources/file/ioDemo.txt");
+    private static File file = new File("src/main/resources/file/ioDemo.txt");
     private char[] chars = new char[]{'a', '1', '5', 'b', '9', '5', '6'};
 
 
@@ -40,7 +40,7 @@ public class IODemo {
         String name = file.getName();
         System.out.println("name = " + name);
         FileWriter fileWriter = new FileWriter(file, true);
-        fileWriter.write("啦啦啦啦😝😋\r\n");
+        fileWriter.write("啦啦啦啦😝😋\r\n2020-11-05");
         fileWriter.write(chars + "\r\n");
         fileWriter.flush();
 

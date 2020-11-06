@@ -161,7 +161,7 @@ public class AlternatePrint {
 
                 }
             }
-        }).start();
+        }, "lalala").start();
 
         int j = 0;
         while (true) {
