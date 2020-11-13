@@ -14,12 +14,13 @@ import java.util.List;
  */
 public class JVMDemo {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         List<JVMDemo> list = new ArrayList<>();
         int i = 0;
         while (true) {
 //            System.out.println(i++);
             list.add(new JVMDemo());
+            Thread.sleep(1L);
         }
     }
 
@@ -33,5 +34,15 @@ public class JVMDemo {
         // VM options: -Drocketmq.namesrvAddr=127.0.0.1:9876
         String property = System.getProperty("rocketmq.namesrvAddr");
         System.out.println(property);
+    }
+
+    @Test
+    public void m2GC() throws InterruptedException {
+        List<Object> list = new ArrayList<>();
+        int i = 0;
+        while (true) {
+            list.add("a" + i++);
+            Thread.sleep(100L);
+        }
     }
 }
