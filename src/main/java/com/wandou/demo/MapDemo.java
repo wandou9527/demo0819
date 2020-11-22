@@ -154,9 +154,48 @@ public class MapDemo {
     }
 
     @Test
-    public void m6LinkedHashMap() {
+    public void m6LinkedHashMap() throws NoSuchFieldException, IllegalAccessException {
+        /**
+         * LinkedHashMap 继承 HashMap，put 实际是调用的 HashMap.put()，
+         * 但LinkedHashMap 重写了 HashMap#afterNodeInsertion(boolean)，做了清除最不常用数据的处理。
+         * LinkedHashMap 的链表结构是通过 newNode() 方法实现的。
+         */
+        Field headField = LinkedHashMap.class.getDeclaredField("head");
+        headField.setAccessible(true);
+        Field tailField = LinkedHashMap.class.getDeclaredField("tail");
+        tailField.setAccessible(true);
+
         LinkedHashMap<String, String> linkedHashMap = new LinkedHashMap<>();
+
         linkedHashMap.put("a", "av");
+        Object head = headField.get(linkedHashMap);
+        System.out.println("head = " + head);
+        Object tail = tailField.get(linkedHashMap);
+        System.out.println("tail = " + tail);
+
+        linkedHashMap.put("b", "bv");
+        head = headField.get(linkedHashMap);
+        System.out.println("head = " + head);
+        tail = tailField.get(linkedHashMap);
+        System.out.println("tail = " + tail);
+
+        linkedHashMap.put("c", "cv");
+        head = headField.get(linkedHashMap);
+        System.out.println("head = " + head);
+        tail = tailField.get(linkedHashMap);
+        System.out.println("tail = " + tail);
+
+        linkedHashMap.put("z", "zv");
+        head = headField.get(linkedHashMap);
+        System.out.println("head = " + head);
+        tail = tailField.get(linkedHashMap);
+        System.out.println("tail = " + tail);
+
+        linkedHashMap.put("d", "dv");
+        head = headField.get(linkedHashMap);
+        System.out.println("head = " + head);
+        tail = tailField.get(linkedHashMap);
+        System.out.println("tail = " + tail);
     }
 
 }

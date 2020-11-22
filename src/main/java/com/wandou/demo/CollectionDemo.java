@@ -383,15 +383,19 @@ public class CollectionDemo {
     public void m11LinkedQueueLimit() throws InterruptedException {
         LinkedBlockingQueue<String> linkedBlockingQueue = new LinkedBlockingQueue<>(10);
         for (char c = 'a'; c < 'z'; c++) {
+            // 达到容量后再添加是无效的，返回false
             boolean offer = linkedBlockingQueue.offer(c + "");
             System.out.println("添加返回：" + c + " " + offer);
         }
         System.out.println("linkedBlockingQueue = " + linkedBlockingQueue);
+        linkedBlockingQueue.poll();
         BlockingQueue<Integer> blockingQueue = new LinkedBlockingQueue<>(10);
         for (int i = 0; i < 100; i++) {
+            // i=9添加成功后，i=10时将阻塞到这里，因为达到了队列的容量capacity
             blockingQueue.put(i);
             System.out.println(i + " 成功");
         }
+        System.out.println("blockingQueue = " + blockingQueue);
     }
 
     /**
