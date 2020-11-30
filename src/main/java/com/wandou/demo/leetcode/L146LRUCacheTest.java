@@ -94,6 +94,14 @@ public class L146LRUCacheTest {
         System.out.println("value3 = " + value3);
         int value4 = l146LRUCache.get(4);// 返回  4
         System.out.println("value4 = " + value4);
+
+//        L146LRUCacheV3 l146LRUCache1 = new L146LRUCacheV3(1);
+//        l146LRUCache1.put(2, 2);
+//        l146LRUCache1.put(1, 1);
+//        int value = l146LRUCache1.get(2);
+//        System.out.println("value = " + value);
+//        int value1 = l146LRUCache1.get(1);
+//        System.out.println("value1 = " + value1);
     }
 
     class MyLinkedHashMap extends LinkedHashMap {

@@ -95,9 +95,8 @@ public class MapDemo {
         Map<Integer, Integer> cardinalityMap = CollectionUtils.getCardinalityMap(hashs);
         System.out.println("cardinalityMap = " + cardinalityMap);
 
-        for (Object obj : ((Object[]) tableField.get(map))) {
-            System.out.println("mapTable中的元素: " + JSON.toJSONString(obj));
-        }
+        Object[] table = (Object[]) tableField.get(map);
+        System.out.println("map table: " + Arrays.toString(table));
 
         Set<Map.Entry> entrySet = map.entrySet();
         for (Map.Entry entry : entrySet) {

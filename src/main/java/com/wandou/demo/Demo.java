@@ -11,6 +11,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.http.protocol.HTTP;
 import org.junit.Test;
 import org.springframework.data.redis.core.RedisTemplate;
+import sun.misc.Unsafe;
 
 import javax.servlet.GenericServlet;
 import java.nio.charset.StandardCharsets;
@@ -349,6 +350,14 @@ public class Demo {
             return sum;
         }
         return m19SingleNum(sum);
+    }
+
+    @Test
+    public void m20Unsafe() {
+        Unsafe unsafe = Unsafe.getUnsafe();
+        System.out.println("unsafe = " + unsafe);
+        int addressSize = unsafe.addressSize();
+        System.out.println(addressSize);
     }
 
 }

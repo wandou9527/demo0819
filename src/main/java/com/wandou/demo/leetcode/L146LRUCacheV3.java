@@ -19,6 +19,10 @@ public class L146LRUCacheV3 {
     public L146LRUCacheV3(int capacity) {
         this.storage = new HashMap<>(capacity);
         this.capacity = capacity;
+        this.head = new Node();
+        this.tail = new Node();
+        head.next = tail;
+        tail.prev = head;
     }
 
     public int get(int key) {
@@ -35,35 +39,33 @@ public class L146LRUCacheV3 {
         if (node == null) {
             node = new Node(key, value);
             addToHead(node);
+            storage.put(key, node);
+            if (storage.size() > capacity) {
+                Node last = removeTail();
+                storage.remove(last.key);
+            }
         } else {
             node.value = value;
             moveToHead(node);
         }
-        storage.put(key, node);
-        afterPut(node);
     }
 
-    private void afterPut(Node node) {
-        if (storage.size() > capacity) {
-            storage.remove(tail.key);
-            removeTail();
-            addToHead(node);
-        }
-    }
+//    private void removeHead() {
+//        Node first = head.next;
+//        head.next = first.next;
+//        first.next.prev = head;
+//    }
 
     /**
      *
      */
     public void addToHead(Node node) {
-        //前链表头
-        Node lastHead = head;
-        head = node;
-        //前头为null说明链表为空
-        if (lastHead == null) {
-            tail = node;
-        } else {
-            head.next = lastHead;
-        }
+        // head 伪链头
+        Node first = head.next;
+        head.next = node;
+        node.prev = head;
+        node.next = first;
+        first.prev = node;
     }
 
     public void moveToHead(Node node) {
@@ -74,6 +76,8 @@ public class L146LRUCacheV3 {
     public void remove(Node node) {
         Node prev = node.prev;
         Node next = node.next;
+        node.prev = null;
+        node.next = null;
         if (prev != null) {
             prev.next = next;
         }
@@ -82,11 +86,12 @@ public class L146LRUCacheV3 {
         }
     }
 
-    public void removeTail() {
-        Node prev = tail.prev;
-        tail.prev = null;
-        tail = prev;
-        tail.next = null;
+    public Node removeTail() {
+        Node last = tail.prev;
+        tail.prev = last.prev;
+        last.prev.next = tail;
+        last.next = null;
+        return last;
     }
 
 

@@ -370,7 +370,7 @@ public class CollectionDemo {
 
         while (true) {
             System.out.println("---- 开始取任务 -----");
-            Movie take = delayQueue.poll();
+            Movie take = delayQueue.take();
             System.out.println(LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_TIME) + " 取到任务take = " + take);
         }
 

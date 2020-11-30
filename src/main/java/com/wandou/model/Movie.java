@@ -48,7 +48,7 @@ public class Movie implements Serializable, Delayed {
     @Override
     public long getDelay(TimeUnit unit) {
         long delay = unit.convert(this.executionTime - System.currentTimeMillis(), TimeUnit.MILLISECONDS);
-        // 这种方式将造成资源浪费，因为队列取数据时是根据此方法返回的时间让线程await，单位是纳秒，以毫秒单位返回的时间数字将比纳秒的小
+        // 这种返回毫秒的方式将造成资源浪费，因为队列取数据时是根据此方法返回的时间让线程await，单位是纳秒，以毫秒单位返回的时间数字将比纳秒的小
         // 那么不到执行时间线程将被多次唤醒，直到真正到执行时间取出数据。
         // 以纳秒返回将不会有这种现象，实际返回纳秒，线程等待相应的纳秒数，被唤醒一次即可拿到数据。
 //        long delay = this.executionTime - System.currentTimeMillis();

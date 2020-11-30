@@ -2,21 +2,24 @@ package com.wandou.demo;
 
 import org.junit.Test;
 
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
 /**
  * @author liming
  * @date 2020/11/22
- * @description LinkedBlockingQueue 研究
+ * @description ArrayBlockingQueue、LinkedBlockingQueue 研究
+ * LinkedBlockingQueue
  * head 节点是不变的，而且item不变且为null，初始化时head=last=new Node(); 之后head就不变了
  * <p>
- * 与arrayQueue的区别：array的初始化即开辟出空间，对空间稍不友好，但增删的时间较快。
+ * 与arrayQueue的区别：array的初始化即开辟数组空间，对空间稍不友好，但增删的时间较快。
  * linked初始几乎不占用数据空间，仅初始化一个head，后续操作时将申请空间，空间友好，时间效率比array稍差。
  */
-public class LinkedBlockingQueueDemo {
+public class BlockingQueueDemo {
 
     @Test
-    public void test() {
+    public void testLinkedBlockingQueue() {
         LinkedBlockingQueue<Integer> linkedBlockingQueue = new LinkedBlockingQueue<>(10);
         for (int i = 0; i < 11; i++) {
             System.out.println(i);
@@ -46,6 +49,10 @@ public class LinkedBlockingQueueDemo {
                 e.printStackTrace();
             }
         }
+    }
+
+    public void testArrayBlockingQueue() {
+        BlockingQueue<Integer> arrBlockingQueue = new ArrayBlockingQueue<>(10);
     }
 
 }
