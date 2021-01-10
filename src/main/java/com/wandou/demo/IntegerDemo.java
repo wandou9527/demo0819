@@ -229,4 +229,13 @@ public class IntegerDemo {
         System.out.println("0.999 + 0.001 = " + (0.99 + 0.01));
 
     }
+
+    @Test
+    public void m9() {
+        System.out.println(Integer.toBinaryString(-1));
+        System.out.println("Integer.toBinaryString(-2) = " + Integer.toBinaryString(-2));
+        System.out.println("Integer.toHexString(33) = " + Integer.toHexString(33));
+        System.out.println(~32);
+        System.out.println(~35);
+    }
 }
